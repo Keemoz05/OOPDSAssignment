@@ -3,6 +3,7 @@
 #include <fstream>
 #include <algorithm>
 #include <vector>
+#include <iomanip>
 using namespace std;
 
 string filetoread = "examplefile.txt";
@@ -11,6 +12,12 @@ int battlefieldwidth = 0;
 int steps = 0;
 int robots = 0;
 
+void DisplayBattlefield(){
+    for (int i =0;i < battlefieldlength;i++){
+        string line(battlefieldwidth,'*');
+        cout << line << endl;
+    }
+}
 
 void AnalyseFile(string line){
     
@@ -33,7 +40,8 @@ void AnalyseFile(string line){
         robots = stoi(stringnum);
     }
     else if(line.find("GenericRobot") != string::npos){
-        //create robot object with Robot robot1(Kidd,3,6)
+        //create robot object with Robot robot1(Kidd,3,6)                          Does it always have to start with genericrobot?
+        //separate by space
     }
     else {
         cout << "invalid command ts pmo " << endl;
@@ -59,4 +67,6 @@ int main(){
     cout << "Battlefield width = " << battlefieldwidth << endl;
     cout << "Steps = "<< steps << endl;
     cout << "Amount of robots = "<< robots << endl;
+    cout << endl;
+    DisplayBattlefield();
 }
