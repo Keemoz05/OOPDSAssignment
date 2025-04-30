@@ -5,6 +5,31 @@
 #include <vector>
 using namespace std;
 
+class robot(){
+    private:
+    string robot_type;
+    string robot_name;
+    int robot_locationX;
+    int robot_locationY;
+    int robot_lives;
+
+
+    public:
+    robot(); //define default constructor parameters
+    robot(type string, name string, locationX int, locationY int){
+        type = robot_type;
+        name = robot_name;
+        locationX = robot_locationX;
+        locationY = robot_locationY;
+
+
+    }
+    get_robotInfo(); //member func prototypes
+    get_lives();
+    isAlive();
+
+};
+
 string filetoread = "examplefile.txt";
 int battlefieldlength = 0;
 int battlefieldwidth = 0;
