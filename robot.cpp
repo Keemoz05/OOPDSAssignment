@@ -7,30 +7,44 @@
 #include <sstream>
 using namespace std;
 
-// class robot{
-//     private:
-//     string robot_type;
-//     string robot_name;
-//     int robot_locationX;
-//     int robot_locationY;
-//     int robot_lives;
+class Robot{                                             //This Robot class is to be inherited by 4 basic abstract subclasses, namely MovingRobot, ShootingRobot, SeeingRobot and ThinkingRobot.   
+    private:
+    string robot_type;
+    string robot_name;
+    int robot_locationX;
+    int robot_locationY;
+    int robot_lives;
 
 
-//     public:
-//     robot(); //define default constructor parameters
-//     robot(string type, string name, int locationX, int location Y){
-//         type = robot_type;
-//         name = robot_name;
-//         locationX = robot_locationX;
-//         locationY = robot_locationY;
+    public:
+    Robot(); //define default constructor parameters
+    Robot(string type, string name, int locationX, int locationY){
+        type = robot_type;
+        name = robot_name;
+        locationX = robot_locationX;
+        locationY = robot_locationY;
+    }
+};
+
+class MovingRobot : public Robot{
+    private:
+
+    public:
+
+};       
+
+class ThinkingRobot : public Robot{
+
+};
 
 
-//     }
-//     //void get_robotInfo(); //member func prototypes
-//     //void get_lives();
-//     //void isAlive();
+class SeeingRobot : public Robot{
 
-//};
+};
+
+class ShootingRobot : public Robot{
+
+};
 
 string filetoread = "examplefile.txt";
 int battlefieldlength = 0;
@@ -70,7 +84,7 @@ void AnalyseFile(string line){
         //separate by space
         string word;
         stringstream s(line);
-        vector <string> words;
+        vector <string> words;                                                     
         while(getline(s,word,' ')){
             words.push_back(word);
         }
