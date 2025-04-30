@@ -17,7 +17,7 @@ using namespace std;
 
 //     public:
 //     robot(); //define default constructor parameters
-//     robot(type string, name string, locationX int, locationY int){
+//     robot(string type, string name, int locationX, int location Y){
 //         type = robot_type;
 //         name = robot_name;
 //         locationX = robot_locationX;
@@ -25,9 +25,9 @@ using namespace std;
 
 
 //     }
-//     //get_robotInfo(); //member func prototypes
-//     //get_lives();
-//     //isAlive();
+//     //void get_robotInfo(); //member func prototypes
+//     //void get_lives();
+//     //void isAlive();
 
 //};
 
