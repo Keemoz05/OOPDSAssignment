@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <vector>
 #include <iomanip>
+#include <sstream>
 using namespace std;
 
 // class robot{
@@ -67,6 +68,15 @@ void AnalyseFile(string line){
     else if(line.find("GenericRobot") != string::npos){
         //create robot object with Robot robot1(Kidd,3,6)                          Does it always have to start with genericrobot?
         //separate by space
+        string word;
+        stringstream s(line);
+        vector <string> words;
+        while(getline(s,word,' ')){
+            words.push_back(word);
+        }
+        for (int r=0;r < words.size();r++){   //r[0] == robot_type,r[1] == robot_name...
+            //create robot type generic
+        }
     }
     else {
         cout << "invalid command ts pmo " << endl;
@@ -92,10 +102,6 @@ int main(){
     cout << "Battlefield width = " << battlefieldwidth << endl;
     cout << "Steps = "<< steps << endl;
     cout << "Amount of robots = "<< robots << endl;
-<<<<<<< HEAD
     cout << endl;
     DisplayBattlefield();
 }
-=======
-}
->>>>>>> 546a9d873ab591a2c3e9d52863f8c12d7bd28d90
