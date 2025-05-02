@@ -5,9 +5,10 @@
 #include <vector>
 #include <iomanip>
 #include <sstream>
+#include <cstdlib>
 using namespace std;
 
-class Robot{                                             //This Robot class is to be inherited by 4 basic abstract subclasses, namely MovingRobot, ShootingRobot, SeeingRobot and ThinkingRobot.   
+class Robot{                                             //This Robot class is to be inherited by 4 basic abstract subclasses, namely MovingRobot, ShootingRobot, SeeingRobot and ThinkingRobot.
     private:
     string robot_type;
     string robot_name;
@@ -17,12 +18,57 @@ class Robot{                                             //This Robot class is t
 
 
     public:
-    Robot(); //define default constructor parameters
+    Robot(){
+
+            robot_type = "Generic Robot";
+            robot_name ="BOB";
+
+            //robot_locationX = rand() * get battlefield width and length
+            //robot_locationY = rand() *
+            robot_lives = 3;
+
+
+    }; //define default constructor parameters
     Robot(string type, string name, int locationX, int locationY){
         type = robot_type;
         name = robot_name;
         locationX = robot_locationX;
         locationY = robot_locationY;
+    }
+
+    void set_location(){
+
+
+    }
+    string get_type() //accessors
+    {
+        return robot_type;
+
+    }
+
+
+    string get_name() //accessors
+    {
+        return robot_name;
+
+    }
+
+    int get_locationX()
+    {
+
+        return robot_locationX;
+    };
+
+    int get_locationY()
+    {
+
+        return robot_locationY;
+    }
+
+
+    int get_lives()
+    {
+        return robot_lives;
     }
 };
 
@@ -31,7 +77,7 @@ class MovingRobot : public Robot{
 
     public:
 
-};       
+};
 
 class ThinkingRobot : public Robot{
 
@@ -60,7 +106,7 @@ void DisplayBattlefield(){
 }
 
 void AnalyseFile(string line){
-    
+
     if(line.find("M by N") != string::npos){
         int pos = line.find(":");
         int pos2 = line.rfind(" ");
@@ -84,7 +130,7 @@ void AnalyseFile(string line){
         //separate by space
         string word;
         stringstream s(line);
-        vector <string> words;                                                     
+        vector <string> words;
         while(getline(s,word,' ')){
             words.push_back(word);
         }
@@ -95,12 +141,12 @@ void AnalyseFile(string line){
     else {
         cout << "invalid command ts pmo " << endl;
     }
-}  
+}
 
 int main(){
 
     ifstream MyReadFile(filetoread);
-    
+
     // Variable to store each line from the file
     string line;
 
@@ -119,3 +165,4 @@ int main(){
     cout << endl;
     DisplayBattlefield();
 }
+
