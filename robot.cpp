@@ -8,6 +8,7 @@
 #include <cstdlib>
 using namespace std;
 
+
 class Robot{                                             //This Robot class is to be inherited by 4 basic abstract subclasses, namely MovingRobot, ShootingRobot, SeeingRobot and ThinkingRobot.
     private:
     string robot_type;
@@ -15,7 +16,6 @@ class Robot{                                             //This Robot class is t
     int robot_locationX;
     int robot_locationY;
     int robot_lives;
-
 
     public:
     Robot(){
@@ -29,6 +29,7 @@ class Robot{                                             //This Robot class is t
 
 
     }; //define default constructor parameters
+
     Robot(string type, string name, int locationX, int locationY){
         type = robot_type;
         name = robot_name;
@@ -36,10 +37,19 @@ class Robot{                                             //This Robot class is t
         locationY = robot_locationY;
     }
 
-    void set_location(){
-
-
+    void set_locationX(int x){
+        robot_locationX = x;
     }
+    void set_locationY(int y){
+        robot_locationY = y;
+    }
+    void set_name(string n){
+        robot_name = n;
+    }
+    void set_type(string t){
+        robot_type = t;
+    }
+
     string get_type() //accessors
     {
         return robot_type;
@@ -65,13 +75,17 @@ class Robot{                                             //This Robot class is t
         return robot_locationY;
     }
 
-
     int get_lives()
     {
         return robot_lives;
     }
+
+    void display_stats(){
+        cout << "I am a " << robot_type << " named " << robot_name;
+    }
 };
 
+vector <Robot> robotsvector;
 class MovingRobot : public Robot{
     private:
 
@@ -99,10 +113,24 @@ int steps = 0;
 int robots = 0;
 
 void DisplayBattlefield(){
+    string grid[battlefieldlength];
+    
     for (int i =0;i < battlefieldlength;i++){
-        string line(battlefieldwidth,'*');
-        cout << line << endl;
+        // string line(battlefieldwidth,'*');
+        // cout << line << endl;
+        grid[i] += string (battlefieldwidth,'*');
     }
+
+    for(int r=0;r<robotsvector.size();r++){
+        grid[robotsvector[r].get_locationX()-1][robotsvector[r].get_locationY()-1] = '+'; //MINUS ONE BECAUSE ARRAYGRID START FROM 0
+    }
+    
+
+    for (string row : grid) {
+        cout << row << endl;
+    }
+
+
 }
 
 void AnalyseFile(string line){
@@ -128,15 +156,37 @@ void AnalyseFile(string line){
     else if(line.find("GenericRobot") != string::npos){
         //create robot object with Robot robot1(Kidd,3,6)                          Does it always have to start with genericrobot?
         //separate by space
+        Robot newRobot;
         string word;
         stringstream s(line);
         vector <string> words;
         while(getline(s,word,' ')){
             words.push_back(word);
         }
-        for (int r=0;r < words.size();r++){   //r[0] == robot_type,r[1] == robot_name...
-            //create robot type generic
+        newRobot.set_type(words[0]);
+        newRobot.set_name(words[1]);
+        if (words[2] != "random"){
+            newRobot.set_locationX(stoi(words[2]));
         }
+        else{
+            newRobot.set_locationX(rand() % battlefieldlength); //set it to a random location
+        }
+        if (words[2] != "random"){
+            newRobot.set_locationY(stoi(words[3]));
+        }
+        else{
+            newRobot.set_locationY(rand() % battlefieldwidth);
+        }
+        
+        
+        // for (int r=0;r < words.size();r++){   //r[0] == robot_type(GenericRobot),r[1] == robot_name(Kidd) //probably dont need this
+        //     //create robot type generic
+        //     //cout << words[r] << endl;
+        //     //newRobot.set_type(words[r]);
+            
+            
+        // }
+        robotsvector.push_back(newRobot);
     }
     else {
         cout << "invalid command ts pmo " << endl;
@@ -144,7 +194,7 @@ void AnalyseFile(string line){
 }
 
 int main(){
-
+    vector <Robot> robotsvector;
     ifstream MyReadFile(filetoread);
 
     // Variable to store each line from the file
@@ -157,6 +207,9 @@ int main(){
         cout << line << endl;
 
     }
+    for(int v = 0;v < robotsvector.size();v++){
+        robotsvector[v].display_stats();
+    }
     cout << endl;
     cout << "Battlefield length = " << battlefieldlength << endl;
     cout << "Battlefield width = " << battlefieldwidth << endl;
@@ -164,5 +217,10 @@ int main(){
     cout << "Amount of robots = "<< robots << endl;
     cout << endl;
     DisplayBattlefield();
+
+    //robot1think and do
+    //robot2think and do
+    //displaybattlefield
+    //loop until turn = 0
 }
 
