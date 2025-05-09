@@ -86,7 +86,7 @@ class Robot{                     //This Robot class is to be inherited by 4 basi
 };
 
 
-Class generic_robot : public Robot{ //derived robot class from robots
+class generic_robot : public Robot{ //derived robot class from robots
 
     private:
         int shells;
@@ -116,7 +116,7 @@ Class generic_robot : public Robot{ //derived robot class from robots
 
             if(upgrades_left > 0){
 
-                upgrades_left--
+                upgrades_left--;
             }
             else{
 
@@ -164,7 +164,7 @@ void DisplayBattlefield(){
     }
 
     for(int r=0;r<robotsvector.size();r++){
-        grid[robotsvector[r].get_locationX()-1][robotsvector[r].get_locationY()-1] = '+'; //MINUS ONE BECAUSE ARRAYGRID START FROM 0
+        grid[robotsvector[r].get_locationX()-1][robotsvector[r].get_locationY()-1] = 'O'; //MINUS ONE BECAUSE ARRAYGRID START FROM 0
     }
 
 
