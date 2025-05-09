@@ -9,7 +9,7 @@
 using namespace std;
 
 
-class Robot{                                             //This Robot class is to be inherited by 4 basic abstract subclasses, namely MovingRobot, ShootingRobot, SeeingRobot and ThinkingRobot.
+class Robot{                     //This Robot class is to be inherited by 4 basic abstract subclasses, namely MovingRobot, ShootingRobot, SeeingRobot and ThinkingRobot.
     private:
     string robot_type;
     string robot_name;
@@ -43,11 +43,11 @@ class Robot{                                             //This Robot class is t
     void set_locationY(int y){
         robot_locationY = y;
     }
-    void set_name(string n){
-        robot_name = n;
+    void set_name(string name){
+        robot_name = name;
     }
-    void set_type(string t){
-        robot_type = t;
+    void set_type(string type){
+        robot_type = type;
     }
 
     string get_type() //accessors
@@ -85,6 +85,48 @@ class Robot{                                             //This Robot class is t
     }
 };
 
+
+Class generic_robot : public Robot{ //derived robot class from robots
+
+    private:
+        int shells;
+        int upgrades_left;
+
+        //shells = 3;
+        //upgrades_left =3; //or the specified amount stated in assignment pdf
+                            //figure out how value assignment works in classes
+
+
+    public:
+
+
+
+        int get_shells(){
+
+            return shells;
+        }
+        int get_upgrades_left(){
+            return upgrades_left;
+
+        }
+        void take_action();             //needs definition
+        void upgrade();                 //needs definition
+        void upgrade_cap(){
+
+
+            if(upgrades_left > 0){
+
+                upgrades_left--
+            }
+            else{
+
+                cout << "Robot have exceeded the upgrade cap" << endl; //temporary cout, will need to link which robot has cap
+            }
+        }
+
+
+};
+
 vector <Robot> robotsvector;
 class MovingRobot : public Robot{
     private:
@@ -114,7 +156,7 @@ int robots = 0;
 
 void DisplayBattlefield(){
     string grid[battlefieldlength];
-    
+
     for (int i =0;i < battlefieldlength;i++){
         // string line(battlefieldwidth,'*');
         // cout << line << endl;
@@ -124,7 +166,7 @@ void DisplayBattlefield(){
     for(int r=0;r<robotsvector.size();r++){
         grid[robotsvector[r].get_locationX()-1][robotsvector[r].get_locationY()-1] = '+'; //MINUS ONE BECAUSE ARRAYGRID START FROM 0
     }
-    
+
 
     for (string row : grid) {
         cout << row << endl;
@@ -161,7 +203,7 @@ void AnalyseFile(string line){
         stringstream s(line);
         vector <string> words;
         while(getline(s,word,' ')){
-            words.push_back(word);
+            words.push_back(word); //word array containing keywords, 0 = type , 1 = name, 3= , //What if there's invalid inputs(tell user whats wrong instead of just tspmo?
         }
         newRobot.set_type(words[0]);
         newRobot.set_name(words[1]);
@@ -177,14 +219,14 @@ void AnalyseFile(string line){
         else{
             newRobot.set_locationY(rand() % battlefieldwidth);
         }
-        
-        
+
+
         // for (int r=0;r < words.size();r++){   //r[0] == robot_type(GenericRobot),r[1] == robot_name(Kidd) //probably dont need this
         //     //create robot type generic
         //     //cout << words[r] << endl;
         //     //newRobot.set_type(words[r]);
-            
-            
+
+
         // }
         robotsvector.push_back(newRobot);
     }
@@ -223,4 +265,3 @@ int main(){
     //displaybattlefield
     //loop until turn = 0
 }
-
