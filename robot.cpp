@@ -9,7 +9,7 @@
 using namespace std;
 
 
-class Robot{                     //This Robot class is to be inherited by 4 basic abstract subclasses, namely MovingRobot, ShootingRobot, SeeingRobot and ThinkingRobot.
+class Robot{ //This Robot class is to be inherited by 4 basic abstract subclasses, namely MovingRobot, ShootingRobot, SeeingRobot and ThinkingRobot.
     private:
     string robot_type;
     string robot_name;
@@ -135,12 +135,12 @@ class MovingRobot : public Robot{
 
 };
 
-class ThinkingRobot : public Robot{
+class ThinkingRobot : public Robot{ // FIXME: Aidil
 
 };
 
 
-class SeeingRobot : public Robot{
+class SeeingRobot : public Robot{ // FIXME: Aidil
 
 };
 
