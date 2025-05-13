@@ -81,7 +81,7 @@ class Robot{ //This Robot class is to be inherited by 4 basic abstract subclasse
     }
 
     void display_stats(){
-        cout << "I am a " << robot_type << " named " << robot_name;
+        cout << "I am a " << robot_type << " named " << robot_name << endl;
     }
 };
 
@@ -236,7 +236,7 @@ void AnalyseFile(string line){
 }
 
 int main(){
-    vector <Robot> robotsvector;
+    // vector <Robot> robotsvector;  //if robotsvector is declared here, its value is empty
     ifstream MyReadFile(filetoread);
 
     // Variable to store each line from the file
@@ -249,7 +249,9 @@ int main(){
         cout << line << endl;
 
     }
+    
     for(int v = 0;v < robotsvector.size();v++){
+        
         robotsvector[v].display_stats();
     }
     cout << endl;
@@ -258,10 +260,20 @@ int main(){
     cout << "Steps = "<< steps << endl;
     cout << "Amount of robots = "<< robots << endl;
     cout << endl;
-    DisplayBattlefield();
+    //DisplayBattlefield();
 
     //robot1think and do
     //robot2think and do
     //displaybattlefield
     //loop until turn = 0
+
+    while(steps > 0){
+        
+        for(int i = 0; i < robotsvector.size(); i++){
+           // robotsvector[i].uuiiaa();
+        }
+        DisplayBattlefield();
+
+        steps -=1;
+    }
 }
