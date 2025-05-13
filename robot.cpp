@@ -80,19 +80,102 @@ class Robot{ //This Robot class is to be inherited by 4 basic abstract subclasse
         return robot_lives;
     }
 
+    void decrease_lives(){
+
+        robot_lives--;
+    }
+
+    bool isAlive(){
+        if(robot_lives <= 0){
+            cout << "Robot is eliminated" << endl; //run this before every turn
+            return true;
+        }
+    }
+
     void display_stats(){
         cout << "I am a " << robot_type << " named " << robot_name << endl;
     }
 };
 
 
-class generic_robot : public Robot{ //derived robot class from robots
+
+
+vector <Robot> robotsvector;
+class MovingRobot : public Robot{
+    private:
+
+    public:
+
+};
+
+class ThinkingRobot : public Robot{ // FIXME: Aidil
+
+};
+
+
+class SeeingRobot : public Robot{ // FIXME: Aidil
+
+};
+
+class ShootingRobot : public Robot{ //Chan
+    //1. input parameters (choose where to shoot)
+    //2. Check if hit, check if suicide, check if valid
+    //3. Check for ammo count, if ammo count == 0, self delete
+    //4. Range is 8
+
+    protected:
+    int shells = 10; //default shell count
+
+    public:
+        bool fire(int x, int y){ //fire member function
+            int selfX = get_locationX();
+            int selfY = get_locationY();
+            double hit_probability = (rand() % 100) / 100; //random number over 100
+
+            if (x == selfX && y == selfY){
+                cout << "Don't shoot yourself you dummy" << endl;
+                return false;
+            }
+
+            if (shells <= 0){
+                cout <<  "ran out of shells, self destructing" << endl;
+                return false;
+            }
+
+            //if range > 8, out of bounds, return false (figure out how to get target location)
+
+            //if selfX - targetX > 8 || if selfY - targetY > 8, target out of range
+
+            shells--; //shell fired and down one count
+
+            if(hit_probability < 0.7){
+
+                //get enemy robot location
+                //enemy.decrease_lives();
+
+
+            }
+            else {
+                cout << "Robot fired, and missed the shot." << endl;
+            }
+
+        }
+         int get_shells(){
+
+            return shells;
+
+        }
+
+};
+
+
+
+class generic_robot : public MovingRobot , public ShootingRobot, public ThinkingRobot , public SeeingRobot{ //generic_robot inherits from the 4 subclasses
 
     private:
-        int shells;
+
         int upgrades_left;
 
-        //shells = 3;
         //upgrades_left =3; //or the specified amount stated in assignment pdf
                             //figure out how value assignment works in classes
 
@@ -101,10 +184,8 @@ class generic_robot : public Robot{ //derived robot class from robots
 
 
 
-        int get_shells(){
 
-            return shells;
-        }
+
         int get_upgrades_left(){
             return upgrades_left;
 
@@ -124,27 +205,6 @@ class generic_robot : public Robot{ //derived robot class from robots
             }
         }
 
-
-};
-
-vector <Robot> robotsvector;
-class MovingRobot : public Robot{
-    private:
-
-    public:
-
-};
-
-class ThinkingRobot : public Robot{ // FIXME: Aidil
-
-};
-
-
-class SeeingRobot : public Robot{ // FIXME: Aidil
-
-};
-
-class ShootingRobot : public Robot{
 
 };
 
@@ -249,9 +309,9 @@ int main(){
         cout << line << endl;
 
     }
-    
+
     for(int v = 0;v < robotsvector.size();v++){
-        
+
         robotsvector[v].display_stats();
     }
     cout << endl;
@@ -268,7 +328,7 @@ int main(){
     //loop until turn = 0
 
     while(steps > 0){
-        
+
         for(int i = 0; i < robotsvector.size(); i++){
            // robotsvector[i].uuiiaa();
         }
