@@ -8,9 +8,10 @@
 #include <cstdlib>
 using namespace std;
 
+//This Robot class is to be inherited by 4 basic abstract subclasses, namely MovingRobot, ShootingRobot, SeeingRobot and ThinkingRobot.
 
-class Robot{ //This Robot class is to be inherited by 4 basic abstract subclasses, namely MovingRobot, ShootingRobot, SeeingRobot and ThinkingRobot.
-    private:
+class Robot{ 
+    protected:
     string robot_type;
     string robot_name;
     int robot_locationX;
@@ -30,13 +31,15 @@ class Robot{ //This Robot class is to be inherited by 4 basic abstract subclasse
 
     }; //define default constructor parameters
 
-    Robot(string type, string name, int locationX, int locationY){
-        type = robot_type;
-        name = robot_name;
-        locationX = robot_locationX;
-        locationY = robot_locationY;
-    }
+    // Robot(string type, string name, int locationX, int locationY){
+    //     type = robot_type;
+    //     name = robot_name;
+    //     locationX = robot_locationX;
+    //     locationY = robot_locationY;
+    // } 
 
+
+    public:
     void set_locationX(int x){
         robot_locationX = x;
     }
@@ -79,17 +82,127 @@ class Robot{ //This Robot class is to be inherited by 4 basic abstract subclasse
     {
         return robot_lives;
     }
+     void decrease_lives(){
+
+        robot_lives--;
+    }
+
+    bool isAlive(){
+        if(robot_lives <= 0){
+            cout << "Robot is eliminated" << endl; //run this before every turn
+            return true;
+        }
+    }
+
 
     void display_stats(){
-        cout << "I am a " << robot_type << " named " << robot_name << endl;
+        cout << "I am a " << robot_type << " named " << robot_name << " at X:" << robot_locationX << " Y:" << robot_locationY << endl;
+    }
+
+    virtual void think() = 0;
+
+    
+    void TakeTurn(){   //If I haven't looked yet, look. If I see an enemy and have shells, fire. Otherwise, move.
+        think();
+
+    }
+    //     // Example: move randomly
+    //     int dx = (rand() % 3) - 1; // -1, 0, 1
+    //     int dy = (rand() % 3) - 1;
+    //     int newX = max(1, min(get_locationX() + dx, battlefieldlength));
+    //     int newY = max(1, min(get_locationY() + dy, battlefieldwidth));
+    //     move(newX, newY);
+    // }
+};
+
+class MovingRobot : virtual public Robot{
+
+    private:    
+
+    protected:
+    void move(){
+        cout << "is moving" << endl;  
     }
 };
 
+class ThinkingRobot : virtual public Robot{ // FIXME: Aidil
 
-class generic_robot : public Robot{ //derived robot class from robots
+    void think() {
+        cout <<  " is thinking..." << endl; //choose to look,move or fire
+        //look();  
+
+        // bool enemyNearby = true;  
+        // if (enemyNearby && shells > 0) {
+        //     fire();
+        // } else {
+        // move();
+        // }
+        }
+    
+};
+
+
+class SeeingRobot : virtual public Robot { // FIXME: Aidil
+
+    protected:
+    void look(){
+        cout << " is seeing" << endl;
+    }
+};
+
+class ShootingRobot : virtual public  Robot{
+
+   //1. input parameters (choose where to shoot)
+    //2. Check if hit, check if suicide, check if valid
+    //3. Check for ammo count, if ammo count == 0, self delete
+    //4. Range is 8
+
+    protected:
+    int shells = 10; //default shell count
+
+    public:
+        bool fire(int x, int y){ //fire member function
+            int selfX = get_locationX();
+            int selfY = get_locationY();
+            double hit_probability = (rand() % 100) / 100; //random number over 100
+
+            if (x == selfX && y == selfY){
+                cout << "Don't shoot yourself you dummy" << endl;
+                return false;
+            }
+
+            if (shells <= 0){
+                cout <<  "ran out of shells, self destructing" << endl;
+                return false;
+            }
+
+            //if range > 8, out of bounds, return false (figure out how to get target location)
+
+            //if selfX - targetX > 8 || if selfY - targetY > 8, target out of range
+
+            shells--; //shell fired and down one count
+
+            if(hit_probability < 0.7){
+
+                //get enemy robot location
+                //enemy.decrease_lives();
+
+
+            }
+            else {
+                cout << "Robot fired, and missed the shot." << endl;
+            }
+
+        }
+         int get_shells(){
+
+            return shells;
+
+        }
+};
+class GenericRobot : public ShootingRobot,public MovingRobot,public SeeingRobot,public ThinkingRobot{ //derived robot class from robots
 
     private:
-        int shells;
         int upgrades_left;
 
         //shells = 3;
@@ -97,14 +210,6 @@ class generic_robot : public Robot{ //derived robot class from robots
                             //figure out how value assignment works in classes
 
 
-    public:
-
-
-
-        int get_shells(){
-
-            return shells;
-        }
         int get_upgrades_left(){
             return upgrades_left;
 
@@ -127,44 +232,28 @@ class generic_robot : public Robot{ //derived robot class from robots
 
 };
 
-vector <Robot> robotsvector;
-class MovingRobot : public Robot{
-    private:
-
-    public:
-
-};
-
-class ThinkingRobot : public Robot{ // FIXME: Aidil
-
-};
-
-
-class SeeingRobot : public Robot{ // FIXME: Aidil
-
-};
-
-class ShootingRobot : public Robot{
-
-};
+// vector <Robot> robotsvector;
+Robot* robots[99];
 
 string filetoread = "examplefile.txt";
 int battlefieldlength = 0;
 int battlefieldwidth = 0;
 int steps = 0;
-int robots = 0;
+int robotamount = 0;
+int r = 0; //if r > robotamount, dont take anymore generic robots
 
 void DisplayBattlefield(){
     string grid[battlefieldlength];
 
     for (int i =0;i < battlefieldlength;i++){
         // string line(battlefieldwidth,'*');
-        // cout << line << endl;
         grid[i] += string (battlefieldwidth,'*');
     }
 
-    for(int r=0;r<robotsvector.size();r++){
-        grid[robotsvector[r].get_locationX()-1][robotsvector[r].get_locationY()-1] = 'O'; //MINUS ONE BECAUSE ARRAYGRID START FROM 0
+    for(int b=0;b < robotamount;b++){
+        //grid[robotsvector[b].get_locationX()-1][robotsvector[b].get_locationY()-1] = 'O'; //MINUS ONE BECAUSE ARRAYGRID START FROM 0
+        grid[robots[b]->get_locationY()-1][robots[b]->get_locationX()-1] = 'R';
+
     }
 
 
@@ -193,42 +282,36 @@ void AnalyseFile(string line){
     else if(line.find("robots")!= string::npos){
         int pos = line.find(":");
         string stringnum = line.substr(pos+1,line.length());
-        robots = stoi(stringnum);
+        robotamount = stoi(stringnum);
     }
-    else if(line.find("GenericRobot") != string::npos){
+    else if(line.find("GenericRobot") != string::npos){ //and robots < 5
         //create robot object with Robot robot1(Kidd,3,6)                          Does it always have to start with genericrobot?
         //separate by space
-        Robot newRobot;
+        robots[r] = new GenericRobot;
         string word;
         stringstream s(line);
         vector <string> words;
         while(getline(s,word,' ')){
             words.push_back(word); //word array containing keywords, 0 = type , 1 = name, 3= , //What if there's invalid inputs(tell user whats wrong instead of just tspmo?
         }
-        newRobot.set_type(words[0]);
-        newRobot.set_name(words[1]);
+
+        //GenericRobot newRobot(words[0],words[1],2,4);
+        robots[r]->set_type(words[0]);
+        robots[r]->set_name(words[1]);
         if (words[2] != "random"){
-            newRobot.set_locationX(stoi(words[2]));
+            robots[r]->set_locationX(stoi(words[2]));
         }
         else{
-            newRobot.set_locationX(rand() % battlefieldlength); //set it to a random location
+            robots[r]->set_locationX(rand() % battlefieldlength); //set it to a random location
         }
         if (words[2] != "random"){
-            newRobot.set_locationY(stoi(words[3]));
+            robots[r]->set_locationY(stoi(words[3]));
         }
         else{
-            newRobot.set_locationY(rand() % battlefieldwidth);
+            robots[r]->set_locationY(rand() % battlefieldwidth);
         }
-
-
-        // for (int r=0;r < words.size();r++){   //r[0] == robot_type(GenericRobot),r[1] == robot_name(Kidd) //probably dont need this
-        //     //create robot type generic
-        //     //cout << words[r] << endl;
-        //     //newRobot.set_type(words[r]);
-
-
-        // }
-        robotsvector.push_back(newRobot);
+        r++;
+        
     }
     else {
         cout << "invalid command ts pmo " << endl;
@@ -238,7 +321,8 @@ void AnalyseFile(string line){
 int main(){
     // vector <Robot> robotsvector;  //if robotsvector is declared here, its value is empty
     ifstream MyReadFile(filetoread);
-
+    // int max_robots = robotamount;
+    // Robot* robots[max_robots];
     // Variable to store each line from the file
     string line;
 
@@ -250,30 +334,25 @@ int main(){
 
     }
     
-    for(int v = 0;v < robotsvector.size();v++){
-        
-        robotsvector[v].display_stats();
+    for(int v = 0;v < robotamount;v++){
+        robots[v]->display_stats();
+        robots[v]->TakeTurn();
     }
     cout << endl;
     cout << "Battlefield length = " << battlefieldlength << endl;
     cout << "Battlefield width = " << battlefieldwidth << endl;
     cout << "Steps = "<< steps << endl;
-    cout << "Amount of robots = "<< robots << endl;
+    cout << "Amount of robots = "<< robotamount << endl;
     cout << endl;
-    //DisplayBattlefield();
-
-    //robot1think and do
-    //robot2think and do
-    //displaybattlefield
-    //loop until turn = 0
-
-    while(steps > 0){
+    DisplayBattlefield();
+    robots[0]->TakeTurn();
+    // while(steps > 0){
         
-        for(int i = 0; i < robotsvector.size(); i++){
-           // robotsvector[i].uuiiaa();
-        }
-        DisplayBattlefield();
+    //     for(int i = 0; i < robotsvector.size(); i++){
+    //        // robotsvector[i].StartTurn();
+    //     }
+    //     DisplayBattlefield();
 
-        steps -=1;
-    }
+    //     steps -=1;
+    // }
 }
