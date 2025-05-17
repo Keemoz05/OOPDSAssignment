@@ -6,11 +6,12 @@
 #include <iomanip>
 #include <sstream>
 #include <cstdlib>
+#include <cmath>
 using namespace std;
 
 //This Robot class is to be inherited by 4 basic abstract subclasses, namely MovingRobot, ShootingRobot, SeeingRobot and ThinkingRobot.
 
-class Robot{ 
+class Robot{
     protected:
     string robot_type;
     string robot_name;
@@ -36,7 +37,7 @@ class Robot{
     //     name = robot_name;
     //     locationX = robot_locationX;
     //     locationY = robot_locationY;
-    // } 
+    // }
 
 
     public:
@@ -101,7 +102,7 @@ class Robot{
 
     virtual void think() = 0;
 
-    
+
     void TakeTurn(){   //If I haven't looked yet, look. If I see an enemy and have shells, fire. Otherwise, move.
         think();
 
@@ -117,11 +118,11 @@ class Robot{
 
 class MovingRobot : virtual public Robot{
 
-    private:    
+    private:
 
     protected:
     void move(){
-        cout << "is moving" << endl;  
+        cout << "is moving" << endl;
     }
 };
 
@@ -129,16 +130,16 @@ class ThinkingRobot : virtual public Robot{ // FIXME: Aidil
 
     void think() {
         cout <<  " is thinking..." << endl; //choose to look,move or fire
-        //look();  
+        //look();
 
-        // bool enemyNearby = true;  
+        // bool enemyNearby = true;
         // if (enemyNearby && shells > 0) {
         //     fire();
         // } else {
         // move();
         // }
         }
-    
+
 };
 
 
@@ -161,23 +162,32 @@ class ShootingRobot : virtual public  Robot{
     int shells = 10; //default shell count
 
     public:
-        bool fire(int x, int y){ //fire member function
-            int selfX = get_locationX();
-            int selfY = get_locationY();
+        bool fire(Robot* target){ //fire member function
+            int selfX = this->get_locationX();
+            int selfY = this->get_locationY();
+            int targetX = target->get_locationX();
+            int targetY= target->get_locationY();
             double hit_probability = (rand() % 100) / 100; //random number over 100
 
-            if (x == selfX && y == selfY){
-                cout << "Don't shoot yourself you dummy" << endl;
+            if (selfX == targetX && selfY == targetY){
+                cout << "Don't shoot yourself you dummy" << endl; //these will be logged in the future
                 return false;
             }
 
             if (shells <= 0){
-                cout <<  "ran out of shells, self destructing" << endl;
+                cout <<  "ran out of shells, self destructing" << endl; //these will be logged in the future
+                while( this->get_lives() > 0){
+                    this->decrease_lives();
+                }
                 return false;
             }
 
-            //if range > 8, out of bounds, return false (figure out how to get target location)
 
+            //if range > 8, out of bounds, return false (figure out how to get target location)
+            if(abs(selfX - targetX) > 8 || abs(selfY - targetY) > 8){
+               cout <<"Target is out of range" << endl;       //these will be logged in the future
+               return false;
+               }
             //if selfX - targetX > 8 || if selfY - targetY > 8, target out of range
 
             shells--; //shell fired and down one count
@@ -185,12 +195,13 @@ class ShootingRobot : virtual public  Robot{
             if(hit_probability < 0.7){
 
                 //get enemy robot location
-                //enemy.decrease_lives();
-
+                target->decrease_lives();
+                return true;
 
             }
             else {
-                cout << "Robot fired, and missed the shot." << endl;
+
+                return false;
             }
 
         }
@@ -208,6 +219,9 @@ class GenericRobot : public ShootingRobot,public MovingRobot,public SeeingRobot,
         //shells = 3;
         //upgrades_left =3; //or the specified amount stated in assignment pdf
                             //figure out how value assignment works in classes
+
+    public:
+        //bool hit = robot->fire(5, 7);
 
 
         int get_upgrades_left(){
@@ -311,7 +325,7 @@ void AnalyseFile(string line){
             robots[r]->set_locationY(rand() % battlefieldwidth);
         }
         r++;
-        
+
     }
     else {
         cout << "invalid command ts pmo " << endl;
@@ -333,7 +347,7 @@ int main(){
         cout << line << endl;
 
     }
-    
+
     for(int v = 0;v < robotamount;v++){
         robots[v]->display_stats();
         robots[v]->TakeTurn();
@@ -347,7 +361,7 @@ int main(){
     DisplayBattlefield();
     robots[0]->TakeTurn();
     // while(steps > 0){
-        
+
     //     for(int i = 0; i < robotsvector.size(); i++){
     //        // robotsvector[i].StartTurn();
     //     }
@@ -356,3 +370,4 @@ int main(){
     //     steps -=1;
     // }
 }
+
