@@ -1,16 +1,14 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include <algorithm>
 #include <vector>
-#include <iomanip>
 #include <sstream>
 #include <cstdlib>
 #include <cmath>
 using namespace std;
 
+// === CLASS DECLARATIONS ===
 //This Robot class is to be inherited by 4 basic abstract subclasses, namely MovingRobot, ShootingRobot, SeeingRobot and ThinkingRobot.
-
 class Robot{
     protected:
     string robot_type;
@@ -93,6 +91,7 @@ class Robot{
             cout << "Robot is eliminated" << endl; //run this before every turn
             return true;
         }
+    // FIXME:[clang] (-Wreturn-type) Non-void function does not return a value in all control paths
     }
 
 
@@ -126,32 +125,7 @@ class MovingRobot : virtual public Robot{
     }
 };
 
-class ThinkingRobot : virtual public Robot{ // FIXME: Aidil
-
-    void think() {
-        cout <<  " is thinking..." << endl; //choose to look,move or fire
-        //look();
-
-        // bool enemyNearby = true;
-        // if (enemyNearby && shells > 0) {
-        //     fire();
-        // } else {
-        // move();
-        // }
-        }
-
-};
-
-
-class SeeingRobot : virtual public Robot { // FIXME: Aidil
-
-    protected:
-    void look(){
-        cout << " is seeing" << endl;
-    }
-};
-
-class ShootingRobot : virtual public  Robot{
+class ShootingRobot : virtual public Robot{
 
    //1. input parameters (choose where to shoot)
     //2. Check if hit, check if suicide, check if valid
@@ -203,7 +177,7 @@ class ShootingRobot : virtual public  Robot{
 
                 return false;
             }
-
+        // FIXME: [clang] (-Wreturn-type) Non-void function does not return a value in all control paths
         }
          int get_shells(){
 
@@ -211,6 +185,50 @@ class ShootingRobot : virtual public  Robot{
 
         }
 };
+
+class SeeingRobot : virtual public Robot { // Aidil
+    // The look(x,y) action will check a 3x3 grid to a robot,
+    // centred on (robotsPositionX + x, robotsPositionY + y).
+    // Example: look(0,0) will:
+    // 1. Provide a robot with its immediate neighbourhood (all visitable places in the next turn)
+    // 2. Reveal whether the location is within the battlefield
+    // 3. Reveal whether a location is has an enemy robot
+    // Note: A location can only have one robot at a time
+
+    void look(int x, int y){
+        cout << " is seeing" << endl;
+    }
+};
+
+class ThinkingRobot : virtual public Robot{ // Aidil
+    // ThinkingRobot is for decision making
+    // Should the robot move? shoot? look?
+
+    void think() {
+        cout << " is thinking..." << endl;
+
+        // Still not sure where I should put the logic for the thinking (within think or another nested function)
+        // For now, I'll leave these declarations
+        void look();{ //
+
+            // bool enemyNearby = true;
+            // if (enemyNearby && shells > 0) {
+            //     fire();
+            // } else {
+            // move();
+        }
+
+        void fire();{
+
+        }
+
+        void move();{
+
+        }
+
+    }
+};
+
 class GenericRobot : public ShootingRobot,public MovingRobot,public SeeingRobot,public ThinkingRobot{ //derived robot class from robots
 
     private:
@@ -246,9 +264,8 @@ class GenericRobot : public ShootingRobot,public MovingRobot,public SeeingRobot,
 
 };
 
-// vector <Robot> robotsvector;
-Robot* robots[99];
-
+// === GLOBAL VARIABLES ===
+Robot* robots[99]; // vector <robot> robotsvector;
 string filetoread = "examplefile.txt";
 int battlefieldlength = 0;
 int battlefieldwidth = 0;
@@ -256,6 +273,52 @@ int steps = 0;
 int robotamount = 0;
 int r = 0; //if r > robotamount, dont take anymore generic robots
 
+// === FUNCTION PROTOTYPES ===
+void DisplayBattlefield();
+void AnalyseFile(string line);
+
+// === MAIN PROGRAM ===
+int main(){
+
+    // vector <Robot> robotsvector;  //if robotsvector is declared here, its value is empty
+    ifstream MyReadFile(filetoread);
+    // int max_robots = robotamount;
+    // Robot* robots[max_robots];
+    // Variable to store each line from the file
+    string line;
+
+    // Read each line from the file and print it
+    while (getline(MyReadFile, line)) {
+        // Process each line as needed
+        AnalyseFile(line);
+        cout << line << endl;
+
+    }
+
+    for(int v = 0;v < robotamount;v++){
+        robots[v]->display_stats();
+        robots[v]->TakeTurn();
+    }
+    cout << endl;
+    cout << "Battlefield length = " << battlefieldlength << endl;
+    cout << "Battlefield width = " << battlefieldwidth << endl;
+    cout << "Steps = "<< steps << endl;
+    cout << "Amount of robots = "<< robotamount << endl;
+    cout << endl;
+    DisplayBattlefield();
+    robots[0]->TakeTurn();
+    // while(steps > 0){
+
+    //     for(int i = 0; i < robotsvector.size(); i++){
+    //        // robotsvector[i].StartTurn();
+    //     }
+    //     DisplayBattlefield();
+
+    //     steps -=1;
+    // }
+}
+
+// === FUNCTION DECLARATIONS ===
 void DisplayBattlefield(){
     string grid[battlefieldlength];
 
@@ -331,43 +394,3 @@ void AnalyseFile(string line){
         cout << "invalid command ts pmo " << endl;
     }
 }
-
-int main(){
-    // vector <Robot> robotsvector;  //if robotsvector is declared here, its value is empty
-    ifstream MyReadFile(filetoread);
-    // int max_robots = robotamount;
-    // Robot* robots[max_robots];
-    // Variable to store each line from the file
-    string line;
-
-    // Read each line from the file and print it
-    while (getline(MyReadFile, line)) {
-        // Process each line as needed
-        AnalyseFile(line);
-        cout << line << endl;
-
-    }
-
-    for(int v = 0;v < robotamount;v++){
-        robots[v]->display_stats();
-        robots[v]->TakeTurn();
-    }
-    cout << endl;
-    cout << "Battlefield length = " << battlefieldlength << endl;
-    cout << "Battlefield width = " << battlefieldwidth << endl;
-    cout << "Steps = "<< steps << endl;
-    cout << "Amount of robots = "<< robotamount << endl;
-    cout << endl;
-    DisplayBattlefield();
-    robots[0]->TakeTurn();
-    // while(steps > 0){
-
-    //     for(int i = 0; i < robotsvector.size(); i++){
-    //        // robotsvector[i].StartTurn();
-    //     }
-    //     DisplayBattlefield();
-
-    //     steps -=1;
-    // }
-}
-
