@@ -7,8 +7,8 @@
 #include <cmath>
 using namespace std;
 
+// === CLASS DECLARATIONS ===
 //This Robot class is to be inherited by 4 basic abstract subclasses, namely MovingRobot, ShootingRobot, SeeingRobot and ThinkingRobot.
-
 class Robot{
     protected:
     string robot_type;
@@ -264,9 +264,8 @@ class GenericRobot : public ShootingRobot,public MovingRobot,public SeeingRobot,
 
 };
 
-// vector <Robot> robotsvector;
-Robot* robots[99];
-
+// === GLOBAL VARIABLES ===
+Robot* robots[99]; // vector <robot> robotsvector;
 string filetoread = "examplefile.txt";
 int battlefieldlength = 0;
 int battlefieldwidth = 0;
@@ -274,6 +273,52 @@ int steps = 0;
 int robotamount = 0;
 int r = 0; //if r > robotamount, dont take anymore generic robots
 
+// === FUNCTION PROTOTYPES ===
+void DisplayBattlefield();
+void AnalyseFile(string line);
+
+// === MAIN PROGRAM ===
+int main(){
+
+    // vector <Robot> robotsvector;  //if robotsvector is declared here, its value is empty
+    ifstream MyReadFile(filetoread);
+    // int max_robots = robotamount;
+    // Robot* robots[max_robots];
+    // Variable to store each line from the file
+    string line;
+
+    // Read each line from the file and print it
+    while (getline(MyReadFile, line)) {
+        // Process each line as needed
+        AnalyseFile(line);
+        cout << line << endl;
+
+    }
+
+    for(int v = 0;v < robotamount;v++){
+        robots[v]->display_stats();
+        robots[v]->TakeTurn();
+    }
+    cout << endl;
+    cout << "Battlefield length = " << battlefieldlength << endl;
+    cout << "Battlefield width = " << battlefieldwidth << endl;
+    cout << "Steps = "<< steps << endl;
+    cout << "Amount of robots = "<< robotamount << endl;
+    cout << endl;
+    DisplayBattlefield();
+    robots[0]->TakeTurn();
+    // while(steps > 0){
+
+    //     for(int i = 0; i < robotsvector.size(); i++){
+    //        // robotsvector[i].StartTurn();
+    //     }
+    //     DisplayBattlefield();
+
+    //     steps -=1;
+    // }
+}
+
+// === FUNCTION DECLARATIONS ===
 void DisplayBattlefield(){
     string grid[battlefieldlength];
 
@@ -349,43 +394,3 @@ void AnalyseFile(string line){
         cout << "invalid command ts pmo " << endl;
     }
 }
-
-int main(){
-    // vector <Robot> robotsvector;  //if robotsvector is declared here, its value is empty
-    ifstream MyReadFile(filetoread);
-    // int max_robots = robotamount;
-    // Robot* robots[max_robots];
-    // Variable to store each line from the file
-    string line;
-
-    // Read each line from the file and print it
-    while (getline(MyReadFile, line)) {
-        // Process each line as needed
-        AnalyseFile(line);
-        cout << line << endl;
-
-    }
-
-    for(int v = 0;v < robotamount;v++){
-        robots[v]->display_stats();
-        robots[v]->TakeTurn();
-    }
-    cout << endl;
-    cout << "Battlefield length = " << battlefieldlength << endl;
-    cout << "Battlefield width = " << battlefieldwidth << endl;
-    cout << "Steps = "<< steps << endl;
-    cout << "Amount of robots = "<< robotamount << endl;
-    cout << endl;
-    DisplayBattlefield();
-    robots[0]->TakeTurn();
-    // while(steps > 0){
-
-    //     for(int i = 0; i < robotsvector.size(); i++){
-    //        // robotsvector[i].StartTurn();
-    //     }
-    //     DisplayBattlefield();
-
-    //     steps -=1;
-    // }
-}
-
