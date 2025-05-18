@@ -1,9 +1,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include <algorithm>
 #include <vector>
-#include <iomanip>
 #include <sstream>
 #include <cstdlib>
 using namespace std;
@@ -92,6 +90,7 @@ class Robot{
             cout << "Robot is eliminated" << endl; //run this before every turn
             return true;
         }
+    // FIXME:[clang] (-Wreturn-type) Non-void function does not return a value in all control paths
     }
 
 
@@ -125,30 +124,41 @@ class MovingRobot : virtual public Robot{
     }
 };
 
-class ThinkingRobot : virtual public Robot{ // FIXME: Aidil
-    // ThinkingRobot is for decision making
-    // It depends on functions for look, fire and move
-    // There is no specific order to be followed, but it's not random
-    void think() {
-        cout <<  " is thinking..." << endl;
-        //look();  
+class SeeingRobot : virtual public Robot { // Aidil
+    // The look(x,y) action will check a 3x3 grid to a robot,
+    // centred on (robotsPositionX + x, robotsPositionY + y).
+    // Example: look(0,0) will:
+    // 1. Provide a robot with its immediate neighbourhood (all visitable places in the next turn)
+    // 2. Reveal whether the location is within the battlefield
+    // 3. Reveal whether a location is has an enemy robot
+    // Note: A location can only have one robot at a time
 
-        // bool enemyNearby = true;  
-        // if (enemyNearby && shells > 0) {
-        //     fire();
-        // } else {
-        // move();
-        // }
-        }
-    
+    void look(int x, int y){
+        cout << " is seeing" << endl;
+    }
 };
 
+class ThinkingRobot : virtual public Robot{ // Aidil
+    // ThinkingRobot is for decision making
+    // Should the robot move? shoot? look?
 
-class SeeingRobot : virtual public Robot { // FIXME: Aidil
+    void think() {
+        cout << " is thinking..." << endl;
 
-    protected:
-    void look(){
-        cout << " is seeing" << endl;
+        // Still not sure where I should put the logic for the thinking (within think or another nested function)
+        // For now, I'll leave these declarations
+        void look();{ //
+
+        }
+
+        void fire();{
+
+        }
+
+        void move();{
+
+        }
+
     }
 };
 
@@ -167,6 +177,7 @@ class ShootingRobot : virtual public  Robot{
             int selfX = get_locationX();
             int selfY = get_locationY();
             double hit_probability = (rand() % 100) / 100; // random number over 100
+            // FIXME: [clang-tidy] (bugprone-integer-division) Result of integer division used in a floating point context; possible loss of precision.
 
             if (x == selfX && y == selfY){
                 cout << "Don't shoot yourself you dummy" << endl;
@@ -194,7 +205,7 @@ class ShootingRobot : virtual public  Robot{
             else {
                 cout << "Robot fired, and missed the shot." << endl;
             }
-
+        // FIXME: [clang] (-Wreturn-type) Non-void function does not return a value in all control paths
         }
          int get_shells(){
 
