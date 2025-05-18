@@ -126,9 +126,11 @@ class MovingRobot : virtual public Robot{
 };
 
 class ThinkingRobot : virtual public Robot{ // FIXME: Aidil
-
+    // ThinkingRobot is for decision making
+    // It depends on functions for look, fire and move
+    // There is no specific order to be followed, but it's not random
     void think() {
-        cout <<  " is thinking..." << endl; //choose to look,move or fire
+        cout <<  " is thinking..." << endl;
         //look();  
 
         // bool enemyNearby = true;  
@@ -164,7 +166,7 @@ class ShootingRobot : virtual public  Robot{
         bool fire(int x, int y){ //fire member function
             int selfX = get_locationX();
             int selfY = get_locationY();
-            double hit_probability = (rand() % 100) / 100; //random number over 100
+            double hit_probability = (rand() % 100) / 100; // random number over 100
 
             if (x == selfX && y == selfY){
                 cout << "Don't shoot yourself you dummy" << endl;
