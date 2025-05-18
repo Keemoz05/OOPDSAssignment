@@ -125,60 +125,7 @@ class MovingRobot : virtual public Robot{
     }
 };
 
-class SeeingRobot : virtual public Robot { // Aidil
-    // The look(x,y) action will check a 3x3 grid to a robot,
-    // centred on (robotsPositionX + x, robotsPositionY + y).
-    // Example: look(0,0) will:
-    // 1. Provide a robot with its immediate neighbourhood (all visitable places in the next turn)
-    // 2. Reveal whether the location is within the battlefield
-    // 3. Reveal whether a location is has an enemy robot
-    // Note: A location can only have one robot at a time
-
-    void look(int x, int y){
-        cout << " is seeing" << endl;
-    }
-};
-
-class ThinkingRobot : virtual public Robot{ // Aidil
-    // ThinkingRobot is for decision making
-    // Should the robot move? shoot? look?
-
-    void think() {
-<<<<<<< HEAD
-        cout << " is thinking..." << endl;
-
-        // Still not sure where I should put the logic for the thinking (within think or another nested function)
-        // For now, I'll leave these declarations
-        void look();{ //
-
-        }
-=======
-        cout <<  " is thinking..." << endl; //choose to look,move or fire
-        //look();
-
-        // bool enemyNearby = true;
-        // if (enemyNearby && shells > 0) {
-        //     fire();
-        // } else {
-        // move();
-        // }
-        }
-
-};
->>>>>>> main
-
-        void fire();{
-
-        }
-
-        void move();{
-
-        }
-
-    }
-};
-
-class ShootingRobot : virtual public  Robot{
+class ShootingRobot : virtual public Robot{
 
    //1. input parameters (choose where to shoot)
     //2. Check if hit, check if suicide, check if valid
@@ -189,20 +136,12 @@ class ShootingRobot : virtual public  Robot{
     int shells = 10; //default shell count
 
     public:
-<<<<<<< HEAD
-        bool fire(int x, int y){ //fire member function
-            int selfX = get_locationX();
-            int selfY = get_locationY();
-            double hit_probability = (rand() % 100) / 100; // random number over 100
-            // FIXME: [clang-tidy] (bugprone-integer-division) Result of integer division used in a floating point context; possible loss of precision.
-=======
         bool fire(Robot* target){ //fire member function
             int selfX = this->get_locationX();
             int selfY = this->get_locationY();
             int targetX = target->get_locationX();
             int targetY= target->get_locationY();
             double hit_probability = (rand() % 100) / 100; //random number over 100
->>>>>>> main
 
             if (selfX == targetX && selfY == targetY){
                 cout << "Don't shoot yourself you dummy" << endl; //these will be logged in the future
@@ -246,6 +185,50 @@ class ShootingRobot : virtual public  Robot{
 
         }
 };
+
+class SeeingRobot : virtual public Robot { // Aidil
+    // The look(x,y) action will check a 3x3 grid to a robot,
+    // centred on (robotsPositionX + x, robotsPositionY + y).
+    // Example: look(0,0) will:
+    // 1. Provide a robot with its immediate neighbourhood (all visitable places in the next turn)
+    // 2. Reveal whether the location is within the battlefield
+    // 3. Reveal whether a location is has an enemy robot
+    // Note: A location can only have one robot at a time
+
+    void look(int x, int y){
+        cout << " is seeing" << endl;
+    }
+};
+
+class ThinkingRobot : virtual public Robot{ // Aidil
+    // ThinkingRobot is for decision making
+    // Should the robot move? shoot? look?
+
+    void think() {
+        cout << " is thinking..." << endl;
+
+        // Still not sure where I should put the logic for the thinking (within think or another nested function)
+        // For now, I'll leave these declarations
+        void look();{ //
+
+            // bool enemyNearby = true;
+            // if (enemyNearby && shells > 0) {
+            //     fire();
+            // } else {
+            // move();
+        }
+
+        void fire();{
+
+        }
+
+        void move();{
+
+        }
+
+    }
+};
+
 class GenericRobot : public ShootingRobot,public MovingRobot,public SeeingRobot,public ThinkingRobot{ //derived robot class from robots
 
     private:
