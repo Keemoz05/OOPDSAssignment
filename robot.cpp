@@ -5,6 +5,7 @@
 #include <sstream>
 #include <cstdlib>
 #include <cmath>
+#include <ctime>
 using namespace std;
 
 // === CLASS DECLARATIONS ===
@@ -100,11 +101,11 @@ class Robot{
     }
 
     virtual void think() = 0;
-
+    virtual void move() = 0;
 
     void TakeTurn(){   //If I haven't looked yet, look. If I see an enemy and have shells, fire. Otherwise, move.
         think();
-
+        move();
     }
     //     // Example: move randomly
     //     int dx = (rand() % 3) - 1; // -1, 0, 1
@@ -121,8 +122,51 @@ class MovingRobot : virtual public Robot{
 
     protected:
     void move(){
-        cout << "is moving" << endl;
+
+        int randommove = rand() % 8 + 1;
+        cout << randommove << endl;
+        switch (randommove){
+            case 1:
+            robot_locationX += 1; //right
+            cout << robot_name << " moved to the right!" << endl;
+            break;
+            case 2:
+            robot_locationX -= 1; //left
+            cout << robot_name << " moved to the left!" << endl;
+            break;
+            case 3:
+            robot_locationX += 1; //top right
+            robot_locationY += 1;
+            cout << robot_name << " moved to the top right!" << endl;
+            break;
+            case 4:
+            robot_locationX -= 1; //top left
+            robot_locationY += 1;
+            cout << robot_name << " moved to the top left!" << endl;
+            break;
+            case 5:
+            robot_locationY += 1;   //top
+            cout << robot_name << " moved up!" << endl;
+            break;
+            case 6:
+            robot_locationY -= 1; //bottom
+            cout << robot_name << " moved down!" << endl;
+            break;
+            case 7:    
+            robot_locationY -= 1; //bottom left
+            robot_locationX -= 1; 
+            cout << robot_name << " moved down left!" << endl;
+            break;
+            case 8:
+            robot_locationX += 1;
+            robot_locationY -= 1; //bottom right
+            cout << robot_name << " moved down right!" << endl;
+
+
+
+
     }
+}
 };
 
 class ShootingRobot : virtual public Robot{
@@ -185,7 +229,7 @@ class ShootingRobot : virtual public Robot{
 
         }
 };
-
+Robot* robots[99];
 class SeeingRobot : virtual public Robot { // Aidil
     // The look(x,y) action will check a 3x3 grid to a robot,
     // centred on (robotsPositionX + x, robotsPositionY + y).
@@ -194,7 +238,7 @@ class SeeingRobot : virtual public Robot { // Aidil
     // 2. Reveal whether the location is within the battlefield
     // 3. Reveal whether a location is has an enemy robot
     // Note: A location can only have one robot at a time
-
+    public:
     void look(int x, int y){
         cout << " is seeing" << endl;
     }
@@ -205,8 +249,8 @@ class ThinkingRobot : virtual public Robot{ // Aidil
     // Should the robot move? shoot? look?
 
     void think() {
-        cout << " is thinking..." << endl;
-
+        cout << robot_name << " is thinking..." << endl;
+        //robots[0]->move();
         // Still not sure where I should put the logic for the thinking (within think or another nested function)
         // For now, I'll leave these declarations
         void look();{ //
@@ -265,7 +309,7 @@ class GenericRobot : public ShootingRobot,public MovingRobot,public SeeingRobot,
 };
 
 // === GLOBAL VARIABLES ===
-Robot* robots[99]; // vector <robot> robotsvector;
+ // vector <robot> robotsvector;
 string filetoread = "examplefile.txt";
 int battlefieldlength = 0;
 int battlefieldwidth = 0;
@@ -279,7 +323,7 @@ void AnalyseFile(string line);
 
 // === MAIN PROGRAM ===
 int main(){
-
+    srand (time(0)); //to make random number work, else same number will keluar everytime
     // vector <Robot> robotsvector;  //if robotsvector is declared here, its value is empty
     ifstream MyReadFile(filetoread);
     // int max_robots = robotamount;
@@ -295,10 +339,10 @@ int main(){
 
     }
 
-    for(int v = 0;v < robotamount;v++){
-        robots[v]->display_stats();
-        robots[v]->TakeTurn();
-    }
+    // for(int v = 0;v < robotamount;v++){
+    //     robots[v]->display_stats();
+    //     robots[v]->TakeTurn();
+    // }
     cout << endl;
     cout << "Battlefield length = " << battlefieldlength << endl;
     cout << "Battlefield width = " << battlefieldwidth << endl;
@@ -307,6 +351,7 @@ int main(){
     cout << endl;
     DisplayBattlefield();
     robots[0]->TakeTurn();
+    DisplayBattlefield();
     // while(steps > 0){
 
     //     for(int i = 0; i < robotsvector.size(); i++){
@@ -341,6 +386,28 @@ void DisplayBattlefield(){
 
 }
 
+void CreateRobotObjects(string type,string name,auto X,auto Y){
+        robots[r] = new GenericRobot;
+        robots[r]->set_type(type);
+        robots[r]->set_name(name);
+        if (X != "random"){
+            robots[r]->set_locationX(stoi(X));
+        }
+        else{
+            robots[r]->set_locationX(rand() % battlefieldlength); //set it to a random location
+        }
+        if (Y != "random"){
+            robots[r]->set_locationY(stoi(Y));                          
+        }
+        else{
+            robots[r]->set_locationY(rand() % battlefieldwidth);
+        }
+        r++;
+
+    }
+  
+
+
 void AnalyseFile(string line){
 
     if(line.find("M by N") != string::npos){
@@ -364,33 +431,17 @@ void AnalyseFile(string line){
     else if(line.find("GenericRobot") != string::npos){ //and robots < 5
         //create robot object with Robot robot1(Kidd,3,6)                          Does it always have to start with genericrobot?
         //separate by space
-        robots[r] = new GenericRobot;
-        string word;
+        string word;     
         stringstream s(line);
         vector <string> words;
         while(getline(s,word,' ')){
             words.push_back(word); //word array containing keywords, 0 = type , 1 = name, 3= , //What if there's invalid inputs(tell user whats wrong instead of just tspmo?
         }
-
         //GenericRobot newRobot(words[0],words[1],2,4);
-        robots[r]->set_type(words[0]);
-        robots[r]->set_name(words[1]);
-        if (words[2] != "random"){
-            robots[r]->set_locationX(stoi(words[2]));
-        }
-        else{
-            robots[r]->set_locationX(rand() % battlefieldlength); //set it to a random location
-        }
-        if (words[2] != "random"){
-            robots[r]->set_locationY(stoi(words[3]));
-        }
-        else{
-            robots[r]->set_locationY(rand() % battlefieldwidth);
-        }
-        r++;
-
-    }
-    else {
+        CreateRobotObjects(words[0],words[1],words[2],words[3]);
+   
+}
+     else{
         cout << "invalid command ts pmo " << endl;
     }
 }
