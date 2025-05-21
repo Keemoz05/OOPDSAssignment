@@ -11,12 +11,14 @@ using namespace std;
 // === CLASS DECLARATIONS ===
 //This Robot class is to be inherited by 4 basic abstract subclasses, namely MovingRobot, ShootingRobot, SeeingRobot and ThinkingRobot.
 class Robot{
-    protected:
+    protected: 
+    int shells = 10;
     string robot_type;
     string robot_name;
     int robot_locationX;
     int robot_locationY;
     int robot_lives;
+    bool foundEnemy; //appropriate name?
 
     public:
     Robot(){
@@ -102,10 +104,11 @@ class Robot{
 
     virtual void think() = 0;
     virtual void move() = 0;
+    virtual void look() = 0;
+   // virtual void fire() = 0;
 
-    void TakeTurn(){   //If I haven't looked yet, look. If I see an enemy and have shells, fire. Otherwise, move.
-        think();
-        move();
+    void TakeTurn(){   
+        think();       
     }
     //     // Example: move randomly
     //     int dx = (rand() % 3) - 1; // -1, 0, 1
@@ -124,7 +127,6 @@ class MovingRobot : virtual public Robot{
     void move(){
 
         int randommove = rand() % 8 + 1;
-        cout << randommove << endl;
         switch (randommove){
             case 1:
             robot_locationX += 1; //right
@@ -136,30 +138,30 @@ class MovingRobot : virtual public Robot{
             break;
             case 3:
             robot_locationX += 1; //top right
-            robot_locationY += 1;
+            robot_locationY -= 1;
             cout << robot_name << " moved to the top right!" << endl;
             break;
             case 4:
             robot_locationX -= 1; //top left
-            robot_locationY += 1;
+            robot_locationY -= 1;
             cout << robot_name << " moved to the top left!" << endl;
             break;
             case 5:
-            robot_locationY += 1;   //top
+            robot_locationY -= 1;   //top
             cout << robot_name << " moved up!" << endl;
             break;
             case 6:
-            robot_locationY -= 1; //bottom
+            robot_locationY += 1; //bottom
             cout << robot_name << " moved down!" << endl;
             break;
             case 7:    
-            robot_locationY -= 1; //bottom left
+            robot_locationY += 1; //bottom left
             robot_locationX -= 1; 
             cout << robot_name << " moved down left!" << endl;
             break;
             case 8:
             robot_locationX += 1;
-            robot_locationY -= 1; //bottom right
+            robot_locationY += 1; //bottom right
             cout << robot_name << " moved down right!" << endl;
 
 
@@ -176,10 +178,10 @@ class ShootingRobot : virtual public Robot{
     //3. Check for ammo count, if ammo count == 0, self delete
     //4. Range is 8
 
-    protected:
-    int shells = 10; //default shell count
 
+    
     public:
+
         bool fire(Robot* target){ //fire member function
             int selfX = this->get_locationX();
             int selfY = this->get_locationY();
@@ -221,7 +223,7 @@ class ShootingRobot : virtual public Robot{
 
                 return false;
             }
-        // FIXME: [clang] (-Wreturn-type) Non-void function does not return a value in all control paths
+        // FIXME: [clang] (-Wreturn-type) Non-void function does not return a value in all control paths 
         }
          int get_shells(){
 
@@ -238,9 +240,9 @@ class SeeingRobot : virtual public Robot { // Aidil
     // 2. Reveal whether the location is within the battlefield
     // 3. Reveal whether a location is has an enemy robot
     // Note: A location can only have one robot at a time
-    public:
-    void look(int x, int y){
-        cout << " is seeing" << endl;
+    protected:
+    void look(){
+        cout << robot_name <<" is looking around..." << endl;
     }
 };
 
@@ -248,27 +250,27 @@ class ThinkingRobot : virtual public Robot{ // Aidil
     // ThinkingRobot is for decision making
     // Should the robot move? shoot? look?
 
-    void think() {
+    void think() { //start with look. If I see an enemy,fire. Otherwise, move.
         cout << robot_name << " is thinking..." << endl;
-        //robots[0]->move();
+
+        this->look();
+        if(foundEnemy == true){
+            //fire();
+        }
+        else{
+            this->move();
+        }
+        
+        
+            
         // Still not sure where I should put the logic for the thinking (within think or another nested function)
         // For now, I'll leave these declarations
-        void look();{ //
-
-            // bool enemyNearby = true;
+        // bool enemyNearby = true;
             // if (enemyNearby && shells > 0) {
             //     fire();
             // } else {
             // move();
-        }
-
-        void fire();{
-
-        }
-
-        void move();{
-
-        }
+      
 
     }
 };
