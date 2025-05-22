@@ -8,6 +8,15 @@
 #include <ctime>
 using namespace std;
 
+// === GLOBAL VARIABLES ===
+vector<string> grid;
+string filetoread = "examplefile.txt";
+int battlefieldlength = 0;
+int battlefieldwidth = 0;
+int steps = 0;
+int robotamount = 0;
+int r = 0; //if r > robotamount, dont take anymore generic robots
+
 // === CLASS DECLARATIONS ===
 //This Robot class is to be inherited by 4 basic abstract subclasses, namely MovingRobot, ShootingRobot, SeeingRobot and ThinkingRobot.
 class Robot{
@@ -18,7 +27,7 @@ class Robot{
     int robot_locationX;
     int robot_locationY;
     int robot_lives;
-    bool foundEnemy; //appropriate name?
+    bool foundEnemy = false; //appropriate name?
 
     public:
     Robot(){
@@ -43,10 +52,10 @@ class Robot{
 
     public:
     void set_locationX(int x){
-        robot_locationX = x;
+        robot_locationX = x-1; //-1 because grid vector starts from 0
     }
     void set_locationY(int y){
-        robot_locationY = y;
+        robot_locationY = y-1;
     }
     void set_name(string name){
         robot_name = name;
@@ -120,49 +129,80 @@ class Robot{
 };
 
 class MovingRobot : virtual public Robot{
-
+    
     private:
 
     protected:
     void move(){
-
         int randommove = rand() % 8 + 1;
         switch (randommove){
             case 1:
+            //if(robotlo)
+            if(robot_locationX + 1 != battlefieldwidth){
+            grid[robot_locationY][robot_locationX] = '*'; //set old location to become empty
             robot_locationX += 1; //right
             cout << robot_name << " moved to the right!" << endl;
+            }
+            else{cout << robot_name << " moved to the right and hit a wall!" << endl;}
             break;
             case 2:
+            if(robot_locationX - 1 != -1){
+            grid[robot_locationY][robot_locationX] = '*';
             robot_locationX -= 1; //left
             cout << robot_name << " moved to the left!" << endl;
+            }
+            else{cout << robot_name << " moved to the left and hit a wall" << endl;}
             break;
             case 3:
+            if(robot_locationX + 1 != battlefieldwidth){
+            grid[robot_locationY][robot_locationX] = '*';
             robot_locationX += 1; //top right
             robot_locationY -= 1;
             cout << robot_name << " moved to the top right!" << endl;
+            }
+            else{cout << robot_name << "moved to the top right and hit a wall!" << endl;}
             break;
             case 4:
+            if(robot_locationX - 1 != -1){
+            grid[robot_locationY][robot_locationX] = '*';
             robot_locationX -= 1; //top left
             robot_locationY -= 1;
             cout << robot_name << " moved to the top left!" << endl;
+            }
+            else{cout << robot_name << " moved to the top left and hit a wall!" << endl;}
             break;
             case 5:
+            if(robot_locationY - 1 != -1){
+            grid[robot_locationY][robot_locationX] = '*';
             robot_locationY -= 1;   //top
             cout << robot_name << " moved up!" << endl;
+            }
+            else {cout << robot_name << " moved to the top and bonked its head on a wall!" << endl;}
             break;
             case 6:
+            if(robot_locationY + 1 != battlefieldlength){
+            grid[robot_locationY][robot_locationX] = '*';
             robot_locationY += 1; //bottom
             cout << robot_name << " moved down!" << endl;
+            }
+            else{cout << robot_name << " moved to the bottom and hit a wall!" << endl;}
             break;
             case 7:    
+            if(robot_locationX - 1 != -1){
+            grid[robot_locationY][robot_locationX] = '*';
             robot_locationY += 1; //bottom left
             robot_locationX -= 1; 
             cout << robot_name << " moved down left!" << endl;
+            }
+            else{cout << robot_name << " moved to the bottom left and hit a wall!" << endl;}
             break;
             case 8:
+            if(robot_locationX + 1 != battlefieldwidth){
+            grid[robot_locationY][robot_locationX] = '*';
             robot_locationX += 1;
             robot_locationY += 1; //bottom right
             cout << robot_name << " moved down right!" << endl;
+            } else{cout << robot_name << " moved to the bottom right and hit a wall!" << endl;}
 
 
 
@@ -243,6 +283,12 @@ class SeeingRobot : virtual public Robot { // Aidil
     protected:
     void look(){
         cout << robot_name <<" is looking around..." << endl;
+        // int dx[] = {-1,0,1,1,1,0,-1,-1};                          //start with top left, top, top right, right, bottom right, bottom , bottom left,left
+        // int dy[] = {-1,-1,-1,0,1,1,1,0};                          //When dx=-1 and dy = -1, it represents top left
+        // for(int i = 0;i < 8;i++){
+        // } just remove these if want, i was just testing around
+        //if robot_x + 1 == 'R', what value to save?
+    
     }
 };
 
@@ -255,7 +301,7 @@ class ThinkingRobot : virtual public Robot{ // Aidil
 
         this->look();
         if(foundEnemy == true){
-            //fire();
+            //fire(shootX,shootY); 
         }
         else{
             this->move();
@@ -310,14 +356,6 @@ class GenericRobot : public ShootingRobot,public MovingRobot,public SeeingRobot,
 
 };
 
-// === GLOBAL VARIABLES ===
- // vector <robot> robotsvector;
-string filetoread = "examplefile.txt";
-int battlefieldlength = 0;
-int battlefieldwidth = 0;
-int steps = 0;
-int robotamount = 0;
-int r = 0; //if r > robotamount, dont take anymore generic robots
 
 // === FUNCTION PROTOTYPES ===
 void DisplayBattlefield();
@@ -351,13 +389,18 @@ int main(){
     cout << "Steps = "<< steps << endl;
     cout << "Amount of robots = "<< robotamount << endl;
     cout << endl;
+    for (int i =0;i < battlefieldlength;i++){
+        // string line(battlefieldwidth,'*');
+        //grid[] += string (battlefieldwidth,'*');
+        grid.push_back(string (battlefieldwidth,'*'));
+    }
     DisplayBattlefield();
     robots[0]->TakeTurn();
     DisplayBattlefield();
     // while(steps > 0){
 
-    //     for(int i = 0; i < robotsvector.size(); i++){
-    //        // robotsvector[i].StartTurn();
+    //     for(int i = 0; i < r; i++){
+    //         robots[i]->TakeTurn();
     //     }
     //     DisplayBattlefield();
 
@@ -367,17 +410,12 @@ int main(){
 
 // === FUNCTION DECLARATIONS ===
 void DisplayBattlefield(){
-    string grid[battlefieldlength];
 
-    for (int i =0;i < battlefieldlength;i++){
-        // string line(battlefieldwidth,'*');
-        grid[i] += string (battlefieldwidth,'*');
-    }
+   
 
     for(int b=0;b < robotamount;b++){
         //grid[robotsvector[b].get_locationX()-1][robotsvector[b].get_locationY()-1] = 'O'; //MINUS ONE BECAUSE ARRAYGRID START FROM 0
-        grid[robots[b]->get_locationY()-1][robots[b]->get_locationX()-1] = 'R';
-
+        grid[robots[b]->get_locationY()][robots[b]->get_locationX()] = 'R'; //grid[Y][X]
     }
 
 
