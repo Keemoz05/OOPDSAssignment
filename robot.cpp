@@ -135,6 +135,7 @@ class MovingRobot : virtual public Robot{
     protected:
     void move(){
         int randommove = rand() % 8 + 1;
+        //int randommove = 8;
         switch (randommove){
             case 1:
             //if(robotlo)
@@ -154,7 +155,7 @@ class MovingRobot : virtual public Robot{
             else{cout << robot_name << " moved to the left and hit a wall" << endl;}
             break;
             case 3:
-            if(robot_locationX + 1 != battlefieldwidth){
+            if(robot_locationX + 1 != battlefieldwidth && robot_locationY - 1 != -1){
             grid[robot_locationY][robot_locationX] = '*';
             robot_locationX += 1; //top right
             robot_locationY -= 1;
@@ -163,7 +164,7 @@ class MovingRobot : virtual public Robot{
             else{cout << robot_name << "moved to the top right and hit a wall!" << endl;}
             break;
             case 4:
-            if(robot_locationX - 1 != -1){
+            if(robot_locationX - 1 != -1 && robot_locationY - 1 != -1){
             grid[robot_locationY][robot_locationX] = '*';
             robot_locationX -= 1; //top left
             robot_locationY -= 1;
@@ -188,7 +189,7 @@ class MovingRobot : virtual public Robot{
             else{cout << robot_name << " moved to the bottom and hit a wall!" << endl;}
             break;
             case 7:    
-            if(robot_locationX - 1 != -1){
+            if(robot_locationX - 1 != -1 && robot_locationY + 1 != battlefieldlength){
             grid[robot_locationY][robot_locationX] = '*';
             robot_locationY += 1; //bottom left
             robot_locationX -= 1; 
@@ -197,7 +198,7 @@ class MovingRobot : virtual public Robot{
             else{cout << robot_name << " moved to the bottom left and hit a wall!" << endl;}
             break;
             case 8:
-            if(robot_locationX + 1 != battlefieldwidth){
+            if(robot_locationX + 1 != battlefieldwidth && robot_locationY + 1 != battlefieldlength){
             grid[robot_locationY][robot_locationX] = '*';
             robot_locationX += 1;
             robot_locationY += 1; //bottom right
@@ -415,6 +416,7 @@ void DisplayBattlefield(){
 
     for(int b=0;b < robotamount;b++){
         //grid[robotsvector[b].get_locationX()-1][robotsvector[b].get_locationY()-1] = 'O'; //MINUS ONE BECAUSE ARRAYGRID START FROM 0
+        //cout << robots[b]->get_locationX() << "," <<  robots[b]->get_locationY() << endl;
         grid[robots[b]->get_locationY()][robots[b]->get_locationX()] = 'R'; //grid[Y][X]
     }
 
@@ -426,7 +428,7 @@ void DisplayBattlefield(){
 
 }
 
-void CreateRobotObjects(string type,string name,auto X,auto Y){
+void CreateRobotObjects(string type,string name,auto X,auto Y){ 
         robots[r] = new GenericRobot;
         robots[r]->set_type(type);
         robots[r]->set_name(name);
