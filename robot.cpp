@@ -297,27 +297,30 @@ class ThinkingRobot : virtual public Robot{ // Aidil
     // ThinkingRobot is for decision making
     // Should the robot move? shoot? look?
 
-    void think() { //start with look. If I see an enemy,fire. Otherwise, move.
+    void think() {
         cout << robot_name << " is thinking..." << endl;
-
+        // Flowchart:
+        // Look. If there's enemy, check number of shells.
+        // If no shells, move. If there is shells, fire.
+        // Ideally, output text of process
         this->look();
-        if(foundEnemy == true){
-            //fire(shootX,shootY); 
-        }
-        else{
-            this->move();
-        }
-        
-        
-            
-        // Still not sure where I should put the logic for the thinking (within think or another nested function)
-        // For now, I'll leave these declarations
-        // bool enemyNearby = true;
-            // if (enemyNearby && shells > 0) {
-            //     fire();
-            // } else {
-            // move();
-      
+
+        // if(foundEnemy == true && shells > 0){
+        //     // FIXME: Target Assignment Code
+        //
+        //     cout << robot_name << " will shoot at " << endl; //FIXME: Code for getting target name
+        //     bool hit = this->fire(Robot* target); // yoinked from GenericRobot comment but still unsure how to implement target
+        //     if(hit) {
+        //         cout << robot_name << " hit the target >:)" << endl;
+        //     }
+        //     else {
+        //         cout << robot_name << " missed the target :(" << endl;
+        //     //fire(shootX,shootY);
+        //     }
+        // else{
+        //     this->move();
+        // }
+        // }
 
     }
 };
