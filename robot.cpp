@@ -140,7 +140,7 @@ class MovingRobot : virtual public Robot{
             case 1:
             //if(robotlo)
             if(robot_locationX + 1 != battlefieldwidth){
-            grid[robot_locationY][robot_locationX] = '*'; //set old location to become empty
+            grid[robot_locationY][robot_locationX] = '-'; //set old location to become empty
             robot_locationX += 1; //right
             cout << robot_name << " moved to the right!" << endl;
             }
@@ -148,7 +148,7 @@ class MovingRobot : virtual public Robot{
             break;
             case 2:
             if(robot_locationX - 1 != -1){
-            grid[robot_locationY][robot_locationX] = '*';
+            grid[robot_locationY][robot_locationX] = '-';
             robot_locationX -= 1; //left
             cout << robot_name << " moved to the left!" << endl;
             }
@@ -156,7 +156,7 @@ class MovingRobot : virtual public Robot{
             break;
             case 3:
             if(robot_locationX + 1 != battlefieldwidth && robot_locationY - 1 != -1){
-            grid[robot_locationY][robot_locationX] = '*';
+            grid[robot_locationY][robot_locationX] = '-';
             robot_locationX += 1; //top right
             robot_locationY -= 1;
             cout << robot_name << " moved to the top right!" << endl;
@@ -165,7 +165,7 @@ class MovingRobot : virtual public Robot{
             break;
             case 4:
             if(robot_locationX - 1 != -1 && robot_locationY - 1 != -1){
-            grid[robot_locationY][robot_locationX] = '*';
+            grid[robot_locationY][robot_locationX] = '-';
             robot_locationX -= 1; //top left
             robot_locationY -= 1;
             cout << robot_name << " moved to the top left!" << endl;
@@ -174,7 +174,7 @@ class MovingRobot : virtual public Robot{
             break;
             case 5:
             if(robot_locationY - 1 != -1){
-            grid[robot_locationY][robot_locationX] = '*';
+            grid[robot_locationY][robot_locationX] = '-';
             robot_locationY -= 1;   //top
             cout << robot_name << " moved up!" << endl;
             }
@@ -182,7 +182,7 @@ class MovingRobot : virtual public Robot{
             break;
             case 6:
             if(robot_locationY + 1 != battlefieldlength){
-            grid[robot_locationY][robot_locationX] = '*';
+            grid[robot_locationY][robot_locationX] = '-';
             robot_locationY += 1; //bottom
             cout << robot_name << " moved down!" << endl;
             }
@@ -190,7 +190,7 @@ class MovingRobot : virtual public Robot{
             break;
             case 7:    
             if(robot_locationX - 1 != -1 && robot_locationY + 1 != battlefieldlength){
-            grid[robot_locationY][robot_locationX] = '*';
+            grid[robot_locationY][robot_locationX] = '-';
             robot_locationY += 1; //bottom left
             robot_locationX -= 1; 
             cout << robot_name << " moved down left!" << endl;
@@ -199,7 +199,7 @@ class MovingRobot : virtual public Robot{
             break;
             case 8:
             if(robot_locationX + 1 != battlefieldwidth && robot_locationY + 1 != battlefieldlength){
-            grid[robot_locationY][robot_locationX] = '*';
+            grid[robot_locationY][robot_locationX] = '-';
             robot_locationX += 1;
             robot_locationY += 1; //bottom right
             cout << robot_name << " moved down right!" << endl;
@@ -284,10 +284,41 @@ class SeeingRobot : virtual public Robot { // Aidil
     protected:
     void look(){
         cout << robot_name <<" is looking around..." << endl;
-        // int dx[] = {-1,0,1,1,1,0,-1,-1};  //start with top left, top, top right, right, bottom right, bottom , bottom left,left
-        // int dy[] = {-1,-1,-1,0,1,1,1,0}; //When dx=-1 and dy = -1, it represents top left
-        // for(int i = 0;i < 8;i++){
-        // } just remove these if want, i was just testing around
+        int dx[] = {-1,0,1,1,1,0,-1,-1};  //start with top left, top, top right, right, bottom right, bottom , bottom left,left
+        int dy[] = {-1,-1,-1,0,1,1,1,0}; //When dx=-1 and dy = -1, it represents top left, these are parallel arrays
+        for(int i = 0;i < 8;i++){
+            int a = robot_locationX + dx[i];
+            int b = robot_locationY + dy[i];
+            //cout << grid[b][a] << " "  << a << " " << b << endl;
+            if(grid[b][a] == 'R'){
+                switch(i){
+                    case 0:
+                    cout << robot_name << " found a target on the top left!" << endl;  //target = a and b, seen
+                    break;
+                    case 1:
+                    cout << robot_name << " found a target on top!" << endl;
+                    break;
+                    case 2:
+                    cout << robot_name << " found a target on top right!" << endl;
+                    break;
+                    case 3:
+                    cout << robot_name << " found a target on the right!" << endl;
+                    break;
+                    case 4:
+                    cout << robot_name << " found a target on below right!" << endl;
+                    break;
+                    case 5:
+                    cout << robot_name << " found a target below!" << endl;
+                    break;
+                    case 6:
+                    cout << robot_name << " found a target on below left!" << endl;
+                    break;
+                    case 7:
+                    cout << robot_name << " found a target on the left!" << endl;
+                    break;
+                }
+            }
+        } 
         //if robot_x + 1 == 'R', what value to save?
     
     }
@@ -303,7 +334,9 @@ class ThinkingRobot : virtual public Robot{ // Aidil
         // Look. If there's enemy, check number of shells.
         // If no shells, move. If there is shells, fire.
         // Ideally, output text of process
+        //this->move();
         this->look();
+
 
         // if(foundEnemy == true && shells > 0){
         //     // FIXME: Target Assignment Code
@@ -394,8 +427,8 @@ int main(){
     cout << "Amount of robots = "<< robotamount << endl;
     cout << endl;
     for (int i =0;i < battlefieldlength;i++){
-        // string line(battlefieldwidth,'*');
-        //grid[] += string (battlefieldwidth,'*');
+        // string line(battlefieldwidth,'-');
+        //grid[] += string (battlefieldwidth,'-');
         grid.push_back(string (battlefieldwidth,'-'));
     }
     DisplayBattlefield();
