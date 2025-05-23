@@ -284,8 +284,8 @@ class SeeingRobot : virtual public Robot { // Aidil
     protected:
     void look(){
         cout << robot_name <<" is looking around..." << endl;
-        // int dx[] = {-1,0,1,1,1,0,-1,-1};                          //start with top left, top, top right, right, bottom right, bottom , bottom left,left
-        // int dy[] = {-1,-1,-1,0,1,1,1,0};                          //When dx=-1 and dy = -1, it represents top left
+        // int dx[] = {-1,0,1,1,1,0,-1,-1};  //start with top left, top, top right, right, bottom right, bottom , bottom left,left
+        // int dy[] = {-1,-1,-1,0,1,1,1,0}; //When dx=-1 and dy = -1, it represents top left
         // for(int i = 0;i < 8;i++){
         // } just remove these if want, i was just testing around
         //if robot_x + 1 == 'R', what value to save?
@@ -396,7 +396,7 @@ int main(){
     for (int i =0;i < battlefieldlength;i++){
         // string line(battlefieldwidth,'*');
         //grid[] += string (battlefieldwidth,'*');
-        grid.push_back(string (battlefieldwidth,'*'));
+        grid.push_back(string (battlefieldwidth,'-'));
     }
     DisplayBattlefield();
     robots[0]->TakeTurn();
