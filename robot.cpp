@@ -28,6 +28,8 @@ class Robot{
     int robot_locationY;
     int robot_lives;
     bool foundEnemy = false; //appropriate name?
+    // int targetX;
+    // int targetY;
 
     public:
     Robot(){
@@ -114,7 +116,7 @@ class Robot{
     virtual void think() = 0;
     virtual void move() = 0;
     virtual void look() = 0;
-   // virtual void fire() = 0;
+    virtual void shoot(int x , int y) = 0;
 
     void TakeTurn(){   
         think();       
@@ -127,14 +129,14 @@ class Robot{
     //     move(newX, newY);
     // }
 };
-
+Robot* robots[99];
 class MovingRobot : virtual public Robot{
     
     private:
 
     protected:
     void move(){
-        int randommove = rand() % 8 + 1;
+        int randommove = rand() % 9 + 1;
         //int randommove = 8;
         switch (randommove){
             case 1:
@@ -204,7 +206,10 @@ class MovingRobot : virtual public Robot{
             robot_locationY += 1; //bottom right
             cout << robot_name << " moved down right!" << endl;
             } else{cout << robot_name << " moved to the bottom right and hit a wall!" << endl;}
-
+            break;
+            case 9:
+            cout << robot_name << " chose to not move!" << endl;
+            break;
 
 
 
@@ -222,7 +227,22 @@ class ShootingRobot : virtual public Robot{
 
     
     public:
-
+  
+    void shoot(int x,int y){
+        
+            for(int i =0;i < robotamount;i++){
+            if(robots[i]->get_locationX() == x && robots[i]->get_locationY() == y){
+                cout << this->robot_name <<" attempts shooting at " << robots[i]->get_name() << "!" << endl;
+                int hit_probability = rand() % 100 + 1; //choose from 0 to 100
+                if(hit_probability < 70){
+                    cout << this->robot_name << " hit and destroyed " << robots[i]->get_name() << "!" << endl;  //then upgrades
+                }
+                else{
+                    cout << this->robot_name << " missed! "  << endl;
+                }
+            }
+        }
+    }
         bool fire(Robot* target){ //fire member function
             int selfX = this->get_locationX();
             int selfY = this->get_locationY();
@@ -272,7 +292,7 @@ class ShootingRobot : virtual public Robot{
 
         }
 };
-Robot* robots[99];
+
 class SeeingRobot : virtual public Robot { // Aidil
     // The look(x,y) action will check a 3x3 grid to a robot,
     // centred on (robotsPositionX + x, robotsPositionY + y).
@@ -281,43 +301,66 @@ class SeeingRobot : virtual public Robot { // Aidil
     // 2. Reveal whether the location is within the battlefield
     // 3. Reveal whether a location is has an enemy robot
     // Note: A location can only have one robot at a time
+    
     protected:
     void look(){
+  
         cout << robot_name <<" is looking around..." << endl;
         int dx[] = {-1,0,1,1,1,0,-1,-1};  //start with top left, top, top right, right, bottom right, bottom , bottom left,left
         int dy[] = {-1,-1,-1,0,1,1,1,0}; //When dx=-1 and dy = -1, it represents top left, these are parallel arrays
         for(int i = 0;i < 8;i++){
-            int a = robot_locationX + dx[i];
-            int b = robot_locationY + dy[i];
+            int a = this->robot_locationX + dx[i];
+            int b = this->robot_locationY + dy[i];
             //cout << grid[b][a] << " "  << a << " " << b << endl;
+
+            if(a != battlefieldwidth && b != battlefieldlength && a != -1 && b != -1){    //check if a and b is out of bounds,if true, dont look there
             if(grid[b][a] == 'R'){
                 switch(i){
                     case 0:
                     cout << robot_name << " found a target on the top left!" << endl;  //target = a and b, seen
+                    shoot(a,b);
+                    foundEnemy = true;
                     break;
                     case 1:
                     cout << robot_name << " found a target on top!" << endl;
+                    shoot(a,b);
+                    foundEnemy = true;
                     break;
                     case 2:
                     cout << robot_name << " found a target on top right!" << endl;
+                    shoot(a,b);
+                    foundEnemy = true;
+                    // targetX = a;
+                    // targetY = b;                   
                     break;
                     case 3:
+                    shoot(a,b);
+                    foundEnemy = true;
                     cout << robot_name << " found a target on the right!" << endl;
                     break;
                     case 4:
+                    shoot(a,b);
+                    foundEnemy = true;
                     cout << robot_name << " found a target on below right!" << endl;
                     break;
                     case 5:
+                    shoot(a,b);
+                    foundEnemy = true;
                     cout << robot_name << " found a target below!" << endl;
                     break;
                     case 6:
+                    foundEnemy = true;
                     cout << robot_name << " found a target on below left!" << endl;
+                    shoot(a,b);
                     break;
                     case 7:
+                    shoot(a,b);
+                    foundEnemy = true;
                     cout << robot_name << " found a target on the left!" << endl;
                     break;
                 }
             }
+        }
         } 
         //if robot_x + 1 == 'R', what value to save?
     
@@ -336,7 +379,10 @@ class ThinkingRobot : virtual public Robot{ // Aidil
         // Ideally, output text of process
         //this->move();
         this->look();
-
+        if(this->foundEnemy == false){
+            cout << this->robot_name << " looked around but didnt found anyone!" << endl;
+            move();
+            }
 
         // if(foundEnemy == true && shells > 0){
         //     // FIXME: Target Assignment Code
@@ -437,7 +483,7 @@ int main(){
     // while(steps > 0){
 
     //     for(int i = 0; i < r; i++){
-    //         robots[i]->TakeTurn();
+    //         robots[i]->TakeTurn();                      //comment these out to make it run only for one robot
     //     }
     //     DisplayBattlefield();
 
