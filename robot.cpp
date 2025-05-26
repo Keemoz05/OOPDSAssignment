@@ -118,7 +118,9 @@ class Robot{
     virtual void shoot(int x , int y) = 0;
 
     void TakeTurn(){
+        if(this->robot_locationX != -1 && this->robot_locationY != -1){ // replace with isAlive?
         think();
+        }
     }
     //     // Example: move randomly
     //     int dx = (rand() % 3) - 1; // -1, 0, 1
@@ -350,7 +352,7 @@ class SeeingRobot : virtual public Robot { // Aidil
 
             if(a != battlefieldwidth && b != battlefieldlength && a != -1 && b != -1){    //check if a and b is out of bounds,if true, dont look there
                                                                                             //only checks if value is on boundary, not beyond
-            if(grid[b][a] == 'R'){
+            if(grid[b][a] != '-'){
                 switch(i){
                     case 0:
                     cout << robot_name << " found a target on the top left!" << endl;  //target = a and b, seen
@@ -416,11 +418,15 @@ class ThinkingRobot : virtual public Robot{ // Aidil
         // If no shells, move. If there is shells, fire.
         // Ideally, output text of process
         //this->move();
-        this->look();
-        if(this->foundEnemy == false){
+         //if its not destroyed, then look
+            this->look();
+            if(this->foundEnemy == false){
             cout << this->robot_name << " looked around but didnt found anyone!" << endl;
             move();
             }
+        
+        
+     
 
         // if(foundEnemy == true && shells > 0){
         //     // FIXME: Target Assignment Code
@@ -556,15 +562,15 @@ int main(){
     DisplayBattlefield();
     robots[0]->TakeTurn();
     DisplayBattlefield();
-    // while(steps > 0){
+    while(steps > 0){
 
-    //     for(int i = 0; i < r; i++){
-    //         robots[i]->taketurn();                      //comment these out to make it run only for one robot
-    //     }
-    //     displaybattlefield();
+        for(int i = 0; i < r; i++){
+            robots[i]->TakeTurn();                      //comment these out to make it run only for one robot
+        }
+        DisplayBattlefield();
 
-    //     steps -=1;
-    // }
+        steps -=1;
+    }
 }
 
 // === FUNCTION DECLARATIONS ===
@@ -579,7 +585,8 @@ void DisplayBattlefield(){
         int x = robots[b]->get_locationX();
         //cout << x << " " << y << endl;
         if(y != -1 || x != -1){
-            grid[y][x] = 'R'; //grid[Y][X]
+            //grid[y][x] = 'R'; //grid[Y][X]
+            grid[y][x] = robots[b]->get_name()[0];
         }
         
     }
