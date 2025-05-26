@@ -255,11 +255,15 @@ class ShootingRobot : virtual public Robot{
             if(robots[i]->get_locationX() == x && robots[i]->get_locationY() == y){
                 cout << this->robot_name <<" attempts shooting at " << robots[i]->get_name() << "!" << endl;
 
-                int hit_probability = rand() % 100 + 1; //choose from 0 to 100
-
+                //int hit_probability = rand() % 100 + 1; //choose from 0 to 100
+                int hit_probability = 69;
                 if(hit_probability < 70){
                     cout << this->robot_name << " hit and destroyed " << robots[i]->get_name() << "!" << endl;  //then upgrades
-                    robots[i]->decrease_lives();
+                    robots[i]->decrease_lives(); 
+                    //cout << robots[i]->get_locationY() << " " << robots[i]->get_locationX() << endl;
+                    grid[robots[i]->get_locationY()][robots[i]->get_locationX()] = '-'; //remove destroyed robot from map, correct the syntax if relevant
+                    robots[i]->set_locationX(0);
+                    robots[i]->set_locationY(0); // set it to 0 because setlocation -= 1;
 
 
                     if(robots[i]->get_lives() <=0){ //means target robot is destroyed, allowing shooter robot to upgrade
@@ -355,35 +359,37 @@ class SeeingRobot : virtual public Robot { // Aidil
                 switch(i){
                     case 0:
                     cout << robot_name << " found a target on the top left!" << endl;  //target = a and b, seen
-                    shoot(a,b);
                     foundEnemy = true;
+                    shoot(a,b);
                     break;
                     case 1:
                     cout << robot_name << " found a target on top!" << endl;
-                    shoot(a,b);
                     foundEnemy = true;
+                    shoot(a,b);
                     break;
                     case 2:
                     cout << robot_name << " found a target on top right!" << endl;
-                    shoot(a,b);
                     foundEnemy = true;
+                    shoot(a,b);
                     // targetX = a;
                     // targetY = b;
                     break;
                     case 3:
-                    shoot(a,b);
                     foundEnemy = true;
                     cout << robot_name << " found a target on the right!" << endl;
+                    shoot(a,b);
                     break;
                     case 4:
-                    shoot(a,b);
+                    
                     foundEnemy = true;
                     cout << robot_name << " found a target on below right!" << endl;
+                    shoot(a,b);
                     break;
                     case 5:
-                    shoot(a,b);
+                    
                     foundEnemy = true;
                     cout << robot_name << " found a target below!" << endl;
+                    shoot(a,b);
                     break;
                     case 6:
                     foundEnemy = true;
@@ -391,9 +397,9 @@ class SeeingRobot : virtual public Robot { // Aidil
                     shoot(a,b);
                     break;
                     case 7:
-                    shoot(a,b);
                     foundEnemy = true;
                     cout << robot_name << " found a target on the left!" << endl;
+                    shoot(a,b);
                     break;
                 }
             }
@@ -574,7 +580,13 @@ void DisplayBattlefield(){
     for(int b=0;b < robotamount;b++){
         //grid[robotsvector[b].get_locationX()-1][robotsvector[b].get_locationY()-1] = 'O'; //MINUS ONE BECAUSE ARRAYGRID START FROM 0
         //cout << robots[b]->get_locationX() << "," <<  robots[b]->get_locationY() << endl;
-        grid[robots[b]->get_locationY()][robots[b]->get_locationX()] = 'R'; //grid[Y][X]
+        int y = robots[b]->get_locationY();
+        int x = robots[b]->get_locationX();
+        //cout << x << " " << y << endl;
+        if(y != -1 || x != -1){
+            grid[y][x] = 'R'; //grid[Y][X]
+        }
+        
     }
 
 
