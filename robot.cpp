@@ -265,12 +265,7 @@ class ShootingRobot : virtual public Robot{
                     robots[i]->set_locationX(0);
                     robots[i]->set_locationY(0); // set it to 0 because setlocation -= 1;
 
-
-                    if(robots[i]->get_lives() <=0){ //means target robot is destroyed, allowing shooter robot to upgrade
-                        cout << this->get_name() << "can choose an upgrade!" << endl;
-                        cout << "robot picks an upgrade from the 3 categories" << endl;
-                        grid[robot_locationY][robot_locationX] = '-'; //remove destroyed robot from map, correct the syntax if relevant
-                    }
+                   
                 }
 
                 else{
