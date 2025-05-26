@@ -260,13 +260,11 @@ class ShootingRobot : virtual public Robot{
                 if(hit_probability < 70){
                     cout << this->robot_name << " hit and destroyed " << robots[i]->get_name() << "!" << endl;  //then upgrades
                     robots[i]->decrease_lives();
+                    cout << this->get_name() << "can choose an upgrade!" << endl;
+                    cout << "robot picks an upgrade from the 3 categories" << endl;
+                    grid[robot_locationY][robot_locationX] = '-'; //remove destroyed robot from map, correct the syntax if relevan
 
-
-                    if(robots[i]->get_lives() <=0){ //means target robot is destroyed, allowing shooter robot to upgrade
-                        cout << this->get_name() << "can choose an upgrade!" << endl;
-                        cout << "robot picks an upgrade from the 3 categories" << endl;
-                        grid[robot_locationY][robot_locationX] = '-'; //remove destroyed robot from map, correct the syntax if relevant
-                    }
+                   
                 }
 
                 else{
