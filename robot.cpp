@@ -510,7 +510,7 @@ class GenericRobot : public ShootingRobot,public MovingRobot,public SeeingRobot,
             }
         }
         // Step 4: Pick the first available area for simplicity (or choose randomly)
-        int randChosenArea = rand() % 2 + 1;
+        int randChosenArea = rand() % notChosenAreas.size();  //gives result from 0 to 3
         string chosenArea = notChosenAreas[randChosenArea];
         addUpgradeArea(chosenArea); // Record that this area has been used
 
@@ -709,15 +709,15 @@ void respawnRobot(){ //when called will loop thru the list of respawning robots 
                         bool placed = false;
 
                         while(!placed){
-                                int randX = rand() % battlefieldlength; //generate location
-                                int randY = rand() % battlefieldwidth;
+                                int randX = (rand() % battlefieldlength)+1; //generate location
+                                int randY = (rand() % battlefieldwidth)+1;
 
 
                             if(grid[randY][randX] == '-' && !isalpha(grid[randY][randX])){ //if it is empty, if = false, program breaks
 
                                 R->set_locationX(randY); //set location
                                 R->set_locationY(randX);
-
+                                cout << R->get_locationY() << " " << R->get_locationX() << endl;
                                 grid[R->get_locationY()][R->get_locationX()] = R->get_name()[0];
                                 cout << R->get_name() << " respawned at " << R->get_locationX() << " " << R->get_locationY() << endl;
                                 placed = true;
