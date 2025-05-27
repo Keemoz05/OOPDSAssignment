@@ -8,9 +8,28 @@
 #include <ctime>
 using namespace std;
 
+//=== FORWARD CLASS DECLARATION ===
+class Robot; //forward declaration
+class RobotUpgrade;
+class HideBot;
+class JumpBot;
+class LongShotBot;
+class SemiAutoBot;
+class ThirtyShotBot;
+class ScoutBot;
+class TrackBot;
+
+
+class RobotUpgrade {
+public:
+    static void MovingUpgrades(Robot*& robotPtr, const string upgrade_name);
+    static void ShootingUpgrades(Robot*& robotPtr, const string upgrade_name);
+    static void SeeingUpgrades(Robot*& robotPtr, const string upgrade_name);
+};
+
 // === GLOBAL VARIABLES ===
 vector<string> grid;
-class Robot; //forward declaration
+
 vector<Robot*> respawnlist;
 string filetoread = "examplefile.txt";
 int battlefieldlength = 0;
@@ -18,6 +37,7 @@ int battlefieldwidth = 0;
 int steps = 0;
 int robotamount = 0;
 int r = 0; //if r > robotamount, dont take anymore generic robots
+
 
 
 // === CLASS DECLARATIONS ===
@@ -140,6 +160,7 @@ class Robot{
     virtual void look() = 0;
     virtual void shoot(int x , int y) = 0;
     virtual void applyUpgrade() = 0;
+
 
 
     void TakeTurn(){
@@ -299,7 +320,7 @@ class ShootingRobot : virtual public Robot{
                     robots[i]->set_locationX(0);
                     robots[i]->set_locationY(0); // set it to 0 because setlocation -= 1;
                     this->applyUpgrade();
-                   
+
                 }
 
                 else{
@@ -489,10 +510,15 @@ class GenericRobot : public ShootingRobot,public MovingRobot,public SeeingRobot,
         //upgrades_left =3; //or the specified amount stated in assignment pdf
                             //figure out how value assignment works in classes
 
-   
+
     public:
 
+
+
+    friend RobotUpgrade;
+
     void applyUpgrade() {
+        Robot* current = this;
         if (getUpgradeCount() >= 3) {
             cout << robot_name << " cannot be upgraded anymore." << endl;
             return;
@@ -503,89 +529,145 @@ class GenericRobot : public ShootingRobot,public MovingRobot,public SeeingRobot,
         vector<string> ShootingUpgrades = {"GrenadeBot","SemiAutoBot","ThirtyShotBot"};
         vector<string> SeeingUpgrades = {"ScoutBot","TrackBot"};
         // Step 3: Find which areas have NOT been chosen yet
-                
-        for (string area : allAreas) {
+
+        for (string area : allAreas) { //loop thru all categories, if havent pick, put into notchosen list
             if (!hasUpgradeArea(area)) {
                 notChosenAreas.push_back(area);
             }
         }
         // Step 4: Pick the first available area for simplicity (or choose randomly)
         int randChosenArea = rand() % notChosenAreas.size();  //gives result from 0 to 3
-        string chosenArea = notChosenAreas[randChosenArea];
+        string chosenArea = notChosenAreas[randChosenArea]; //what if the number returned is 3, and theres no index 3?
         addUpgradeArea(chosenArea); // Record that this area has been used
 
           if (chosenArea == "moving") {
             int randMovingUpgrade = rand() % MovingUpgrades.size();
             cout << robot_name << " upgrades with " << MovingUpgrades[randMovingUpgrade] << "!" << endl;
+            RobotUpgrade::MovingUpgrades(current, MovingUpgrades[randMovingUpgrade]);
+
             //
         } else if (chosenArea == "shooting") {
             int randShootingUpgrade = rand() % ShootingUpgrades.size();
             cout << robot_name << " upgrades with " << ShootingUpgrades[randShootingUpgrade] << "!" << endl;
+            RobotUpgrade::ShootingUpgrades(current, ShootingUpgrades[randShootingUpgrade]);
+
         } else if (chosenArea == "seeing") {
             int randSeeingUpgrade = rand() % SeeingUpgrades.size();
             cout << robot_name << " upgrades with " << SeeingUpgrades[randSeeingUpgrade] << "!" << endl;
+            RobotUpgrade::SeeingUpgrades(current ,SeeingUpgrades[randSeeingUpgrade]);
         }
-  
+
     }
-
-        int get_upgrades_left(){
-            return upgrades_left;
-
-        }
-        void take_action();             //needs definition
-        void upgrade();                 //needs definition
-        void upgrade_cap(){
-
-
-            if(upgrades_left > 0){
-
-                upgrades_left--;
-            }
-            else{
-
-                cout << "Robot have exceeded the upgrade cap" << endl; //temporary cout, will need to link which robot has cap
-            }
-        }
 
 
 };
-// class RobotUpgrade : public GenericRobot{
-// //Robot only upgrades when it destroys another
-// //Robot can only choose one upgrade each from (moving,shooting,looking)
-// //Robot has an upgrade limit of 3
 
 
-//     protected:
+class HideBot : public GenericRobot{
 
-//         GenericRobot* pRobot;
-//     public:
-//     void applyUpgrade() override{
-        
-//     }
-//         RobotUpgrade(GenericRobot* Robot){}
-//         void RandUpgrade();
-// //        Keep track of which categories have been picked
-// //        Randomly pick a category not yet picked
-// //        Randomly pick an upgrade from that category
+    public:
+          HideBot(Robot* baseRobot) {
+        // store baseRobot pointer internally if needed
+        // or forward to base class constructor if you have one
+    }
+
+ };
 
 
 
+ class JumpBot : public GenericRobot{
+
+    public:
+          JumpBot(Robot* baseRobot) {}
+
+ };
+
+ class LongShotBot : public GenericRobot{
+    public:
+          LongShotBot(Robot* baseRobot) {}
+ };
+
+ class SemiAutoBot : public GenericRobot{
+    public:
+          SemiAutoBot(Robot* baseRobot) {}
+ };
+
+ class ThirtyShotBot : public GenericRobot{
+    public:
+          ThirtyShotBot(Robot* baseRobot) {}
+ };
+
+ class ScoutBot : public GenericRobot{
+    public:
+          ScoutBot(Robot* baseRobot) {}
+ };
+
+ class TrackBot : public GenericRobot{
+    public:
+          TrackBot(Robot* baseRobot) {}
+ };
 
 
 
-// };
 
-// class HideBot : public RobotUpgrade{
+         void RobotUpgrade:: MovingUpgrades(Robot*& robotPtr ,const string upgrade_name) {
+            if(upgrade_name == "HideBot"){
+                robotPtr = new HideBot(robotPtr);
+                cout << "Robot is upgraded to a HideBot" << endl;
+            }
+
+            else if(upgrade_name == "JumpBot") {
+                //robotPtr = new JumpBot(robotPtr);
+
+            }
+         }
+            void RobotUpgrade::ShootingUpgrades(Robot*& robotPtr ,const string upgrade_name) {
+
+//             if(upgrade_name == "GrenadeBot"){
+//                robotPtr = new GrenadeBot(robotPtr);
+
+                 if(upgrade_name == "LongshotBot"){
+                    robotPtr = new LongShotBot(robotPtr);
+                     cout << "Robot is upgraded to a LongshotBot" << endl;
+            }
+                if(upgrade_name == "SemiAutoBot"){
+                    robotPtr = new SemiAutoBot(robotPtr);
+                     cout << "Robot is upgraded to a SemiAutoBot" << endl;
+            }
+                else if(upgrade_name == "ThirtyShotBot"){
+                    robotPtr = new ThirtyShotBot(robotPtr);
+                     cout << "Robot is upgraded to a ThirtyShotBot" << endl;
+            }
 
 
 
-// };
-// class JumpBot : public RobotUpgrade{};
-// class LongShotBot : public RobotUpgrade{};
-// class SemiAutoBot : public RobotUpgrade{};
-// class ThirtyShotBot : public RobotUpgrade{};
-// class ScoutBot : public RobotUpgrade{};
-// class TrackBot : public RobotUpgrade{};
+
+         }
+
+              void RobotUpgrade :: SeeingUpgrades(Robot*& robotPtr ,const string upgrade_name){
+
+
+                 if(upgrade_name == "ScoutBot"){
+                    robotPtr = new ScoutBot(robotPtr);
+                     cout << "Robot is upgraded to a ScoutBot" << endl;
+            }
+                else if(upgrade_name == "Trackbot"){
+                    robotPtr = new TrackBot(robotPtr);
+                     cout << "Robot is upgraded to a TrackBot" << endl;
+            }
+
+
+
+
+         }
+
+
+
+
+
+
+
+
 
 
 
@@ -697,6 +779,7 @@ void respawnRobot(){ //when called will loop thru the list of respawning robots 
         //check for empty
         //check for robots number
         //check for if another robot is on the tile
+        //it should respawn as generic robot
 
 
 
