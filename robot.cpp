@@ -29,8 +29,22 @@ class Robot{
     bool foundEnemy = false; //appropriate name?
     // int targetX;
     // int targetY;
-
+    vector<string> upgrades_done;
     public:
+        // Check if a robot has already used an area upgrade
+    bool hasUpgradeArea(string area) {
+        for (string a : upgrades_done) {
+            if (a == area) return true;
+        }
+        return false;
+    }
+    int getUpgradeCount() {
+        return upgrades_done.size();
+    }
+        // Add a newly selected area to the list
+    void addUpgradeArea(string area) {
+        upgrades_done.push_back(area);
+    }
     Robot(){
 
             robot_type = "Generic Robot";
@@ -116,6 +130,8 @@ class Robot{
     virtual void move() = 0;
     virtual void look() = 0;
     virtual void shoot(int x , int y) = 0;
+    virtual void applyUpgrade() = 0;
+
 
     void TakeTurn(){
         if(this->robot_locationX != -1 && this->robot_locationY != -1){ // replace with isAlive?
@@ -266,7 +282,7 @@ class ShootingRobot : virtual public Robot{
                     grid[robots[i]->get_locationY()][robots[i]->get_locationX()] = '-'; //remove destroyed robot from map, correct the syntax if relevant
                     robots[i]->set_locationX(0);
                     robots[i]->set_locationY(0); // set it to 0 because setlocation -= 1;
-
+                    this->applyUpgrade();
                    
                 }
 
@@ -425,7 +441,7 @@ class ThinkingRobot : virtual public Robot{ // Aidil
             move();
             }
         
-        
+            
      
 
         // if(foundEnemy == true && shells > 0){
@@ -448,8 +464,8 @@ class ThinkingRobot : virtual public Robot{ // Aidil
     }
 };
 
-class GenericRobot : public ShootingRobot,public MovingRobot,public SeeingRobot,public ThinkingRobot{ //derived robot class from robots
-
+class GenericRobot : public ShootingRobot,public MovingRobot,public SeeingRobot,public ThinkingRobot //derived robot class from robots
+{
     private:
         int upgrades_left;
 
@@ -457,10 +473,44 @@ class GenericRobot : public ShootingRobot,public MovingRobot,public SeeingRobot,
         //upgrades_left =3; //or the specified amount stated in assignment pdf
                             //figure out how value assignment works in classes
 
-
+   
     public:
 
+    void applyUpgrade() {
+        if (getUpgradeCount() >= 3) {
+            cout << robot_name << " cannot be upgraded anymore." << endl;
+            return;
+        }
+        vector<string> allAreas = {"moving", "shooting", "seeing"};
+        vector<string> notChosenAreas;
+        vector<string> MovingUpgrades = {"HideBot","JumpBot"};
+        vector<string> ShootingUpgrades = {"GrenadeBot","SemiAutoBot","ThirtyShotBot"};
+        vector<string> SeeingUpgrades = {"ScoutBot","TrackBot"};
+        // Step 3: Find which areas have NOT been chosen yet
+                
+        for (string area : allAreas) {
+            if (!hasUpgradeArea(area)) {
+                notChosenAreas.push_back(area);
+            }
+        }
+        // Step 4: Pick the first available area for simplicity (or choose randomly)
+        int randChosenArea = rand() % 2 + 1;
+        string chosenArea = notChosenAreas[randChosenArea];
+        addUpgradeArea(chosenArea); // Record that this area has been used
 
+          if (chosenArea == "moving") {
+            int randMovingUpgrade = rand() % MovingUpgrades.size();
+            cout << robot_name << " upgrades with " << MovingUpgrades[randMovingUpgrade] << "!" << endl;
+            //
+        } else if (chosenArea == "shooting") {
+            int randShootingUpgrade = rand() % ShootingUpgrades.size();
+            cout << robot_name << " upgrades with " << ShootingUpgrades[randShootingUpgrade] << "!" << endl;
+        } else if (chosenArea == "seeing") {
+            int randSeeingUpgrade = rand() % SeeingUpgrades.size();
+            cout << robot_name << " upgrades with " << SeeingUpgrades[randSeeingUpgrade] << "!" << endl;
+        }
+  
+    }
 
         int get_upgrades_left(){
             return upgrades_left;
@@ -483,41 +533,43 @@ class GenericRobot : public ShootingRobot,public MovingRobot,public SeeingRobot,
 
 
 };
-class RobotUpgrade : public GenericRobot{
-//Robot only upgrades when it destroys another
-//Robot can only choose one upgrade each from (moving,shooting,looking)
-//Robot has an upgrade limit of 3
+// class RobotUpgrade : public GenericRobot{
+// //Robot only upgrades when it destroys another
+// //Robot can only choose one upgrade each from (moving,shooting,looking)
+// //Robot has an upgrade limit of 3
 
 
-    protected:
+//     protected:
 
-        GenericRobot* pRobot;
-    public:
-
-        RobotUpgrade(GenericRobot* Robot){}
-        void RandUpgrade();
-//        Keep track of which categories have been picked
-//        Randomly pick a category not yet picked
-//        Randomly pick an upgrade from that category
-
-
-
-
-
-
-};
-
-class HideBot : public RobotUpgrade{
+//         GenericRobot* pRobot;
+//     public:
+//     void applyUpgrade() override{
+        
+//     }
+//         RobotUpgrade(GenericRobot* Robot){}
+//         void RandUpgrade();
+// //        Keep track of which categories have been picked
+// //        Randomly pick a category not yet picked
+// //        Randomly pick an upgrade from that category
 
 
 
-};
-class JumpBot : public RobotUpgrade{};
-class LongShotBot : public RobotUpgrade{};
-class SemiAutoBot : public RobotUpgrade{};
-class ThirtyShotBot : public RobotUpgrade{};
-class ScoutBot : public RobotUpgrade{};
-class TrackBot : public RobotUpgrade{};
+
+
+
+// };
+
+// class HideBot : public RobotUpgrade{
+
+
+
+// };
+// class JumpBot : public RobotUpgrade{};
+// class LongShotBot : public RobotUpgrade{};
+// class SemiAutoBot : public RobotUpgrade{};
+// class ThirtyShotBot : public RobotUpgrade{};
+// class ScoutBot : public RobotUpgrade{};
+// class TrackBot : public RobotUpgrade{};
 
 
 
@@ -562,15 +614,15 @@ int main(){
     DisplayBattlefield();
     robots[0]->TakeTurn();
     DisplayBattlefield();
-    while(steps > 0){
+    // while(steps > 0){
 
-        for(int i = 0; i < r; i++){
-            robots[i]->TakeTurn();                      //comment these out to make it run only for one robot
-        }
-        DisplayBattlefield();
+    //     for(int i = 0; i < r; i++){
+    //         robots[i]->TakeTurn();                      //comment these out to make it run only for one robot
+    //     }
+    //     DisplayBattlefield();
 
-        steps -=1;
-    }
+    //     steps -=1;
+    // }
 }
 
 // === FUNCTION DECLARATIONS ===
