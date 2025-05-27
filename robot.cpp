@@ -10,12 +10,15 @@ using namespace std;
 
 // === GLOBAL VARIABLES ===
 vector<string> grid;
+class Robot; //forward declaration
+vector<Robot*> respawnlist;
 string filetoread = "examplefile.txt";
 int battlefieldlength = 0;
 int battlefieldwidth = 0;
 int steps = 0;
 int robotamount = 0;
 int r = 0; //if r > robotamount, dont take anymore generic robots
+
 
 // === CLASS DECLARATIONS ===
 //This Robot class is to be inherited by 4 basic abstract subclasses, namely MovingRobot, ShootingRobot, SeeingRobot and ThinkingRobot.
@@ -97,13 +100,19 @@ class Robot{
      void decrease_lives(){
 
         robot_lives--;
+        respawnlist.push_back(this); //puts robot into respawn queue list
+
     }
 
     bool isAlive(){
         if(robot_lives <= 0){
-            cout << "Robot is eliminated" << endl; //run this before every turn
+            cout << "Robot is eliminated and will no longer respawn!" << endl; //run this before every turn
+            return false;
+        }
+        else{
             return true;
         }
+
     // FIXME:[clang] (-Wreturn-type) Non-void function does not return a value in all control paths
     }
 
@@ -118,7 +127,7 @@ class Robot{
     virtual void shoot(int x , int y) = 0;
 
     void TakeTurn(){
-        if(this->robot_locationX != -1 && this->robot_locationY != -1){ // replace with isAlive?
+        if(this->robot_locationX != -1 && this->robot_locationY != -1 && isAlive()){
         think();
         }
     }
@@ -130,7 +139,10 @@ class Robot{
     //     move(newX, newY);
     // }
 };
+
 Robot* robots[99]; //Note: delete objects afterwards to reduce memory leaks
+
+
 class MovingRobot : virtual public Robot{
 
     private:
@@ -247,32 +259,36 @@ class ShootingRobot : virtual public Robot{
         }
 
         if(this->get_locationX() == x && this->get_locationY() == y){
-                    cout << "Don't shoot yourself you dummy" << endl;
+                cout << "Don't shoot yourself you dummy" << endl;
                 return;
             }
+
+
+
 
             for(int i =0;i < robotamount;i++){
 
 
             if(robots[i]->get_locationX() == x && robots[i]->get_locationY() == y){
                 cout << this->robot_name <<" attempts shooting at " << robots[i]->get_name() << "!" << endl;
+                this->use_ammo();
 
                 //int hit_probability = rand() % 100 + 1; //choose from 0 to 100
                 int hit_probability = 69;
                 if(hit_probability < 70){
                     cout << this->robot_name << " hit and destroyed " << robots[i]->get_name() << "!" << endl;  //then upgrades
-                    robots[i]->decrease_lives(); 
+                    robots[i]->decrease_lives();
                     //cout << robots[i]->get_locationY() << " " << robots[i]->get_locationX() << endl;
                     grid[robots[i]->get_locationY()][robots[i]->get_locationX()] = '-'; //remove destroyed robot from map, correct the syntax if relevant
                     robots[i]->set_locationX(0);
                     robots[i]->set_locationY(0); // set it to 0 because setlocation -= 1;
 
-                   
+
                 }
 
                 else{
                     cout << this->robot_name << " missed! "  << endl;
-                    this->use_ammo();
+
                 }
                 return;
             }
@@ -377,13 +393,13 @@ class SeeingRobot : virtual public Robot { // Aidil
                     shoot(a,b);
                     break;
                     case 4:
-                    
+
                     foundEnemy = true;
                     cout << robot_name << " found a target on below right!" << endl;
                     shoot(a,b);
                     break;
                     case 5:
-                    
+
                     foundEnemy = true;
                     cout << robot_name << " found a target below!" << endl;
                     shoot(a,b);
@@ -424,9 +440,9 @@ class ThinkingRobot : virtual public Robot{ // Aidil
             cout << this->robot_name << " looked around but didnt found anyone!" << endl;
             move();
             }
-        
-        
-     
+
+
+
 
         // if(foundEnemy == true && shells > 0){
         //     // FIXME: Target Assignment Code
@@ -525,6 +541,7 @@ class TrackBot : public RobotUpgrade{};
 // === FUNCTION PROTOTYPES ===
 void DisplayBattlefield();
 void AnalyseFile(string line);
+void respawnRobot();
 
 // === MAIN PROGRAM ===
 int main(){
@@ -559,18 +576,21 @@ int main(){
         //grid[] += string (battlefieldwidth,'-');
         grid.push_back(string (battlefieldwidth,'-'));
     }
+    //DisplayBattlefield();
+    //robots[0]->TakeTurn(); //one robot interaction
     DisplayBattlefield();
-    robots[0]->TakeTurn();
+    respawnRobot();
     DisplayBattlefield();
     while(steps > 0){
 
         for(int i = 0; i < r; i++){
             robots[i]->TakeTurn();                      //comment these out to make it run only for one robot
         }
+        respawnRobot();
         DisplayBattlefield();
 
-        steps -=1;
-    }
+      steps -=1;
+   }
 }
 
 // === FUNCTION DECLARATIONS ===
@@ -588,7 +608,7 @@ void DisplayBattlefield(){
             //grid[y][x] = 'R'; //grid[Y][X]
             grid[y][x] = robots[b]->get_name()[0];
         }
-        
+
     }
 
 
@@ -618,6 +638,52 @@ void CreateRobotObjects(string type,string name,string X,string Y){ //auto is no
         r++;
 
     }
+
+void respawnRobot(){ //when called will loop thru the list of respawning robots and spawn all of them in random location
+
+        vector<Robot*> Deaddead;
+        //check for empty
+        //check for robots number
+        //check for if another robot is on the tile
+
+
+
+
+
+            for(int i =0 ; i < respawnlist.size(); i++){
+                Robot* R = respawnlist[i];
+
+                if(R->isAlive()){
+                        bool placed = false;
+
+                        while(!placed){
+                                int randX = rand() % battlefieldlength; //generate location
+                                int randY = rand() % battlefieldwidth;
+
+
+                            if(grid[randY][randX] == '-' && !isalpha(grid[randY][randX])){ //if it is empty, if = false, program breaks
+
+                                R->set_locationX(randY); //set location
+                                R->set_locationY(randX);
+
+                                grid[R->get_locationY()][R->get_locationX()] = R->get_name()[0];
+                                cout << R->get_name() << " respawned at " << R->get_locationX() << " " << R->get_locationY() << endl;
+                                placed = true;
+                                respawnlist.erase(respawnlist.begin()); //remove the first element
+
+                            }
+                        }
+                }
+
+                else{
+                    cout<<  R->get_name() << " is dead dead fr" << endl;
+                    Deaddead.push_back(R);
+                }
+
+
+                }
+}
+
 
 
 
