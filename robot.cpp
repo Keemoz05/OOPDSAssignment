@@ -679,6 +679,8 @@ int main(){
     // DisplayBattlefield();
     // respawnRobot();
     // DisplayBattlefield();
+     Robot* W = nullptr; //declaring W to ensure the scope covers the methods from robot class
+     string input;
 
      while(steps > 0){
         int bots_left = 0; //bot counter
@@ -688,14 +690,74 @@ int main(){
         respawnRobot();
         DisplayBattlefield();
 
-     
 
       steps -=1;
 
+      for(int i = 0 ; i < r ; i++){
+            if(robots[i]->isAlive()){
+                bots_left++;
+                 W = robots[i];
 
+            }
+              }
+              if(bots_left ==1){
+                win_con1 = true;
+                cout << W->get_name() << " has won the game!" << endl;
+                break;
+
+
+              }
+   }
+   if(steps <= 0 && win_con1 == false){
+
+    win_con2 = true;
+    cout << "The game has ran out of turns! The robots have come to a stalemate!" << endl << endl;
+
+    cout << "Wait.... just .... more..... turn....... " << endl;
+    cout << "Y/N?" << endl;
+
+    cin >> input ;
+
+    if(input== "y" || input =="Y"){
+
+
+        while(win_con1 != true){
+
+
+            int bots_left = 0; //bot counter
+        for(int i = 0; i < r; i++){
+            robots[i]->TakeTurn();                      //comment these out to make it run only for one robot
+        }
+        respawnRobot();
+        DisplayBattlefield();
+
+
+      steps -=1;
+
+      for(int i = 0 ; i < r ; i++){
+            if(robots[i]->isAlive()){
+                bots_left++;
+                 W = robots[i];
+
+            }
+              }
+              if(bots_left ==1){
+                win_con1 = true;
+                cout << W->get_name() << " has won the game!" << endl;
+                break;
+
+
+
+              }
+
+        }
+
+    }else{
+
+        exit(0);
+    }
    }
 }
-
 // === FUNCTION DECLARATIONS ===
 void DisplayBattlefield(){
 
