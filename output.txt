@@ -1,0 +1,1057 @@
+M by N : 10 10
+steps: 50
+robots: 5
+GenericRobot Kidd 3 5
+GenericRobot Jet 2 5
+GenericRobot Alpha 2 7
+GenericRobot Beta 8 6
+GenericRobot Star random random
+
+Battlefield length = 10
+Battlefield width = 10
+Steps = 50
+Amount of robots = 5
+
+  1  2  3  4  5  6  7  8  9 10 1 |  -  -  -  -  -  -  -  -  -  -
+ 2 |  -  -  -  -  -  -  -  -  -  -
+ 3 |  -  -  -  -  -  -  -  -  -  -
+ 4 |  -  -  -  -  -  -  -  -  -  S
+ 5 |  -  J  K  -  -  -  -  -  -  -
+ 6 |  -  -  -  -  -  -  -  B  -  -
+ 7 |  -  A  -  -  -  -  -  -  -  -
+ 8 |  -  -  -  -  -  -  -  -  -  -
+ 9 |  -  -  -  -  -  -  -  -  -  -
+10 |  -  -  -  -  -  -  -  -  -  -
+Kidd is thinking...
+Kidd is looking around...
+Kidd found a target on the left!
+Kidd attempts shooting at Jet!
+Kidd hit and destroyed Jet!
+Jet now has 2 lives left.
+Kidd upgrades with HideBot!
+Alpha is thinking...
+Alpha is looking around...
+Alpha moved to the top right!
+Beta is thinking...
+Beta is looking around...
+Beta moved to the top right!
+Star is thinking...
+Star is looking around...
+Star moved up!
+Jet respawned at coordinates 2 2!
+  1  2  3  4  5  6  7  8  9 10 1 |  -  -  -  -  -  -  -  -  -  -
+ 2 |  -  J  -  -  -  -  -  -  -  -
+ 3 |  -  -  -  -  -  -  -  -  -  S
+ 4 |  -  -  -  -  -  -  -  -  -  -
+ 5 |  -  -  K  -  -  -  -  -  B  -
+ 6 |  -  -  A  -  -  -  -  -  -  -
+ 7 |  -  -  -  -  -  -  -  -  -  -
+ 8 |  -  -  -  -  -  -  -  -  -  -
+ 9 |  -  -  -  -  -  -  -  -  -  -
+10 |  -  -  -  -  -  -  -  -  -  -
+Kidd is thinking...
+Kidd is looking around...
+Kidd found a target below!
+Kidd attempts shooting at Alpha!
+Kidd missed! 
+Jet is thinking...
+Jet is looking around...
+Jet moved to the right!
+Alpha is thinking...
+Alpha is looking around...
+Alpha found a target on top!
+Alpha attempts shooting at Kidd!
+Alpha missed! 
+Beta is thinking...
+Beta is looking around...
+Beta chose to not move!
+Star is thinking...
+Star is looking around...
+Star moved up!
+Nobody died last turn.
+  1  2  3  4  5  6  7  8  9 10 1 |  -  -  -  -  -  -  -  -  -  -
+ 2 |  -  -  J  -  -  -  -  -  -  S
+ 3 |  -  -  -  -  -  -  -  -  -  -
+ 4 |  -  -  -  -  -  -  -  -  -  -
+ 5 |  -  -  K  -  -  -  -  -  B  -
+ 6 |  -  -  A  -  -  -  -  -  -  -
+ 7 |  -  -  -  -  -  -  -  -  -  -
+ 8 |  -  -  -  -  -  -  -  -  -  -
+ 9 |  -  -  -  -  -  -  -  -  -  -
+10 |  -  -  -  -  -  -  -  -  -  -
+Kidd is thinking...
+Kidd is looking around...
+Kidd found a target below!
+Kidd attempts shooting at Alpha!
+Kidd hit and destroyed Alpha!
+Alpha now has 2 lives left.
+Jet is thinking...
+Jet is looking around...
+Jet moved down!
+Beta is thinking...
+Beta is looking around...
+Beta moved up!
+Star is thinking...
+Star is looking around...
+Star moved to the bottom right and hit a wall!
+Alpha respawned at coordinates 9 3!
+  1  2  3  4  5  6  7  8  9 10 1 |  -  -  -  -  -  -  -  -  -  -
+ 2 |  -  -  -  -  -  -  -  -  -  S
+ 3 |  -  -  J  -  -  -  -  -  A  -
+ 4 |  -  -  -  -  -  -  -  -  B  -
+ 5 |  -  -  K  -  -  -  -  -  -  -
+ 6 |  -  -  -  -  -  -  -  -  -  -
+ 7 |  -  -  -  -  -  -  -  -  -  -
+ 8 |  -  -  -  -  -  -  -  -  -  -
+ 9 |  -  -  -  -  -  -  -  -  -  -
+10 |  -  -  -  -  -  -  -  -  -  -
+Kidd is thinking...
+Kidd is looking around...
+Kidd moved up!
+Jet is thinking...
+Jet is looking around...
+Jet moved down!
+Alpha is thinking...
+Alpha is looking around...
+Alpha found a target on top right!
+Alpha attempts shooting at Star!
+Alpha hit and destroyed Star!
+Star now has 2 lives left.
+Alpha found a target below!
+Alpha attempts shooting at Beta!
+Alpha hit and destroyed Beta!
+Beta now has 2 lives left.
+Star respawned at coordinates 6 7!
+  1  2  3  4  5  6  7  8  9 10 1 |  -  -  -  -  -  -  -  -  -  -
+ 2 |  -  -  -  -  -  -  -  -  -  -
+ 3 |  -  -  -  -  -  -  -  -  A  -
+ 4 |  -  -  J  -  -  -  -  -  -  -
+ 5 |  -  -  -  -  -  -  -  -  -  -
+ 6 |  -  -  -  -  -  -  -  -  -  -
+ 7 |  -  -  -  -  -  S  -  -  -  -
+ 8 |  -  -  -  -  -  -  -  -  -  -
+ 9 |  -  -  -  -  -  -  -  -  -  -
+10 |  -  -  -  -  -  -  -  -  -  -
+Kidd is thinking...
+Kidd is looking around...
+Kidd moved to the left!
+Jet is thinking...
+Jet is looking around...
+Jet moved to the right!
+Alpha is thinking...
+Alpha is looking around...
+Alpha chose to not move!
+Star is thinking...
+Star is looking around...
+Star moved to the right!
+Beta respawned at coordinates 2 3!
+  1  2  3  4  5  6  7  8  9 10 1 |  -  -  -  -  -  -  -  -  -  -
+ 2 |  -  -  -  -  -  -  -  -  -  -
+ 3 |  -  B  -  -  -  -  -  -  A  -
+ 4 |  -  K  -  J  -  -  -  -  -  -
+ 5 |  -  -  -  -  -  -  -  -  -  -
+ 6 |  -  -  -  -  -  -  -  -  -  -
+ 7 |  -  -  -  -  -  -  S  -  -  -
+ 8 |  -  -  -  -  -  -  -  -  -  -
+ 9 |  -  -  -  -  -  -  -  -  -  -
+10 |  -  -  -  -  -  -  -  -  -  -
+Kidd is thinking...
+Kidd is looking around...
+Kidd found a target on top!
+Kidd attempts shooting at Beta!
+Kidd missed! 
+Jet is thinking...
+Jet is looking around...
+Jet moved down left!
+Alpha is thinking...
+Alpha is looking around...
+Alpha moved to the top left!
+Beta is thinking...
+Beta is looking around...
+Beta found a target below!
+Beta attempts shooting at Kidd!
+Beta hit and destroyed Kidd!
+Kidd now has 2 lives left.
+Beta upgrades with ScoutBot!
+Star is thinking...
+Star is looking around...
+Star moved down right!
+Kidd respawned at coordinates 7 9!
+  1  2  3  4  5  6  7  8  9 10 1 |  -  -  -  -  -  -  -  -  -  -
+ 2 |  -  -  -  -  -  -  -  A  -  -
+ 3 |  -  B  -  -  -  -  -  -  -  -
+ 4 |  -  -  -  -  -  -  -  -  -  -
+ 5 |  -  -  J  -  -  -  -  -  -  -
+ 6 |  -  -  -  -  -  -  -  -  -  -
+ 7 |  -  -  -  -  -  -  -  -  -  -
+ 8 |  -  -  -  -  -  -  -  S  -  -
+ 9 |  -  -  -  -  -  -  K  -  -  -
+10 |  -  -  -  -  -  -  -  -  -  -
+Kidd is thinking...
+Kidd is looking around...
+Kidd found a target on top right!
+Kidd attempts shooting at Star!
+Kidd missed! 
+Jet is thinking...
+Jet is looking around...
+Jet moved up!
+Alpha is thinking...
+Alpha is looking around...
+Alpha chose to not move!
+Beta is thinking...
+Beta scouts the whole battlefield!
+Beta decides to shoot at Star
+Beta attempts shooting at Star!
+Beta hit and destroyed Star!
+Star now has 1 lives left.
+Beta upgrades with ScoutBot!
+Star respawned at coordinates 5 4!
+  1  2  3  4  5  6  7  8  9 10 1 |  -  -  -  -  -  -  -  -  -  -
+ 2 |  -  -  -  -  -  -  -  A  -  -
+ 3 |  -  B  -  -  -  -  -  -  -  -
+ 4 |  -  -  J  -  S  -  -  -  -  -
+ 5 |  -  -  -  -  -  -  -  -  -  -
+ 6 |  -  -  -  -  -  -  -  -  -  -
+ 7 |  -  -  -  -  -  -  -  -  -  -
+ 8 |  -  -  -  -  -  -  -  -  -  -
+ 9 |  -  -  -  -  -  -  K  -  -  -
+10 |  -  -  -  -  -  -  -  -  -  -
+Kidd is thinking...
+Kidd is looking around...
+Kidd moved to the left!
+Jet is thinking...
+Jet is looking around...
+Jet found a target on the top left!
+Jet attempts shooting at Beta!
+Jet hit and destroyed Beta!
+Beta now has 1 lives left.
+Alpha is thinking...
+Alpha is looking around...
+Alpha moved to the left!
+Star is thinking...
+Star is looking around...
+Star chose to not move!
+Beta respawned at coordinates 9 9!
+  1  2  3  4  5  6  7  8  9 10 1 |  -  -  -  -  -  -  -  -  -  -
+ 2 |  -  -  -  -  -  -  A  -  -  -
+ 3 |  -  -  -  -  -  -  -  -  -  -
+ 4 |  -  -  J  -  S  -  -  -  -  -
+ 5 |  -  -  -  -  -  -  -  -  -  -
+ 6 |  -  -  -  -  -  -  -  -  -  -
+ 7 |  -  -  -  -  -  -  -  -  -  -
+ 8 |  -  -  -  -  -  -  -  -  -  -
+ 9 |  -  -  -  -  -  K  -  -  B  -
+10 |  -  -  -  -  -  -  -  -  -  -
+Kidd is thinking...
+Kidd is looking around...
+Kidd moved to the right!
+Jet is thinking...
+Jet is looking around...
+Jet moved to the top right!
+Alpha is thinking...
+Alpha is looking around...
+Alpha moved down!
+Beta is thinking...
+Beta scouts the whole battlefield!
+Beta decides to shoot at Star
+Beta attempts shooting at Star!
+Beta missed! 
+Star is thinking...
+Star is looking around...
+Star moved to the left!
+Nobody died last turn.
+  1  2  3  4  5  6  7  8  9 10 1 |  -  -  -  -  -  -  -  -  -  -
+ 2 |  -  -  -  -  -  -  -  -  -  -
+ 3 |  -  -  -  J  -  -  A  -  -  -
+ 4 |  -  -  -  S  -  -  -  -  -  -
+ 5 |  -  -  -  -  -  -  -  -  -  -
+ 6 |  -  -  -  -  -  -  -  -  -  -
+ 7 |  -  -  -  -  -  -  -  -  -  -
+ 8 |  -  -  -  -  -  -  -  -  -  -
+ 9 |  -  -  -  -  -  -  K  -  B  -
+10 |  -  -  -  -  -  -  -  -  -  -
+Kidd is thinking...
+Kidd is looking around...
+Kidd chose to not move!
+Jet is thinking...
+Jet is looking around...
+Jet found a target below!
+Jet attempts shooting at Star!
+Jet missed! 
+Alpha is thinking...
+Alpha is looking around...
+Alpha moved down right!
+Beta is thinking...
+Beta scouts the whole battlefield!
+Beta decides to shoot at Star
+Beta attempts shooting at Star!
+Beta missed! 
+Beta has run out of Scout charges!Star is thinking...
+Star is looking around...
+Star found a target on top!
+Star attempts shooting at Jet!
+Star missed! 
+Nobody died last turn.
+  1  2  3  4  5  6  7  8  9 10 1 |  -  -  -  -  -  -  -  -  -  -
+ 2 |  -  -  -  -  -  -  -  -  -  -
+ 3 |  -  -  -  J  -  -  -  -  -  -
+ 4 |  -  -  -  S  -  -  -  A  -  -
+ 5 |  -  -  -  -  -  -  -  -  -  -
+ 6 |  -  -  -  -  -  -  -  -  -  -
+ 7 |  -  -  -  -  -  -  -  -  -  -
+ 8 |  -  -  -  -  -  -  -  -  -  -
+ 9 |  -  -  -  -  -  -  K  -  B  -
+10 |  -  -  -  -  -  -  -  -  -  -
+Kidd is thinking...
+Kidd is looking around...
+Kidd moved to the top right!
+Jet is thinking...
+Jet is looking around...
+Jet found a target below!
+Jet attempts shooting at Star!
+Jet hit and destroyed Star!
+Star now has 0 lives left.
+Jet upgrades with ThirtyShotBot!
+Alpha is thinking...
+Alpha is looking around...
+Alpha moved to the top right!
+Beta is thinking...
+Beta is looking around...
+Beta moved to the top left!
+Star is eliminated and will no longer respawn!
+  1  2  3  4  5  6  7  8  9 10 1 |  -  -  -  -  -  -  -  -  -  -
+ 2 |  -  -  -  -  -  -  -  -  -  -
+ 3 |  -  -  -  J  -  -  -  -  A  -
+ 4 |  -  -  -  -  -  -  -  -  -  -
+ 5 |  -  -  -  -  -  -  -  -  -  -
+ 6 |  -  -  -  -  -  -  -  -  -  -
+ 7 |  -  -  -  -  -  -  -  -  -  -
+ 8 |  -  -  -  -  -  -  -  B  -  -
+ 9 |  -  -  -  -  -  -  -  -  -  -
+10 |  -  -  -  -  -  -  -  -  -  -
+Kidd is thinking...
+Kidd is looking around...
+Kidd moved up!
+Jet is thinking...
+Jet is looking around...
+Jet moved up!
+Alpha is thinking...
+Alpha is looking around...
+Alpha moved down!
+Beta is thinking...
+Beta is looking around...
+Beta moved down right!
+Nobody died last turn.
+  1  2  3  4  5  6  7  8  9 10 1 |  -  -  -  -  -  -  -  -  -  -
+ 2 |  -  -  -  J  -  -  -  -  -  -
+ 3 |  -  -  -  -  -  -  -  -  -  -
+ 4 |  -  -  -  -  -  -  -  -  A  -
+ 5 |  -  -  -  -  -  -  -  -  -  -
+ 6 |  -  -  -  -  -  -  -  -  -  -
+ 7 |  -  -  -  -  -  -  -  K  -  -
+ 8 |  -  -  -  -  -  -  -  -  -  -
+ 9 |  -  -  -  -  -  -  -  -  B  -
+10 |  -  -  -  -  -  -  -  -  -  -
+Kidd is thinking...
+Kidd is looking around...
+Kidd moved to the top right!
+Jet is thinking...
+Jet is looking around...
+Jet moved down right!
+Alpha is thinking...
+Alpha is looking around...
+Alpha moved down left!
+Beta is thinking...
+Beta is looking around...
+Beta moved to the top left!
+Nobody died last turn.
+  1  2  3  4  5  6  7  8  9 10 1 |  -  -  -  -  -  -  -  -  -  -
+ 2 |  -  -  -  -  -  -  -  -  -  -
+ 3 |  -  -  -  -  J  -  -  -  -  -
+ 4 |  -  -  -  -  -  -  -  -  -  -
+ 5 |  -  -  -  -  -  -  -  A  -  -
+ 6 |  -  -  -  -  -  -  -  -  K  -
+ 7 |  -  -  -  -  -  -  -  -  -  -
+ 8 |  -  -  -  -  -  -  -  B  -  -
+ 9 |  -  -  -  -  -  -  -  -  -  -
+10 |  -  -  -  -  -  -  -  -  -  -
+Kidd is thinking...
+Kidd is looking around...
+Kidd found a target on the top left!
+Kidd attempts shooting at Alpha!
+Kidd hit and destroyed Alpha!
+Alpha now has 1 lives left.
+Kidd upgrades with TrackBot!
+Jet is thinking...
+Jet is looking around...
+Jet moved down left!
+Beta is thinking...
+Beta is looking around...
+Beta chose to not move!
+Alpha respawned at coordinates 1 6!
+  1  2  3  4  5  6  7  8  9 10 1 |  -  -  -  -  -  -  -  -  -  -
+ 2 |  -  -  -  -  -  -  -  -  -  -
+ 3 |  -  -  -  -  -  -  -  -  -  -
+ 4 |  -  -  -  J  -  -  -  -  -  -
+ 5 |  -  -  -  -  -  -  -  -  -  -
+ 6 |  A  -  -  -  -  -  -  -  K  -
+ 7 |  -  -  -  -  -  -  -  -  -  -
+ 8 |  -  -  -  -  -  -  -  B  -  -
+ 9 |  -  -  -  -  -  -  -  -  -  -
+10 |  -  -  -  -  -  -  -  -  -  -
+Kidd is thinking...
+Kidd is tracking Jet at 3 3
+Kidd is looking around...
+Kidd chose to not move!
+Jet is thinking...
+Jet is looking around...
+Jet moved to the right!
+Alpha is thinking...
+Alpha is looking around...
+Alpha moved to the top left and hit a wall!
+Beta is thinking...
+Beta is looking around...
+Beta moved to the right!
+Nobody died last turn.
+  1  2  3  4  5  6  7  8  9 10 1 |  -  -  -  -  -  -  -  -  -  -
+ 2 |  -  -  -  -  -  -  -  -  -  -
+ 3 |  -  -  -  -  -  -  -  -  -  -
+ 4 |  -  -  -  -  J  -  -  -  -  -
+ 5 |  -  -  -  -  -  -  -  -  -  -
+ 6 |  A  -  -  -  -  -  -  -  K  -
+ 7 |  -  -  -  -  -  -  -  -  -  -
+ 8 |  -  -  -  -  -  -  -  -  B  -
+ 9 |  -  -  -  -  -  -  -  -  -  -
+10 |  -  -  -  -  -  -  -  -  -  -
+Kidd is thinking...
+Kidd is looking around...
+Kidd moved down left!
+Jet is thinking...
+Jet is looking around...
+Jet moved down!
+Alpha is thinking...
+Alpha is looking around...
+Alpha moved down!
+Beta is thinking...
+Beta is looking around...
+Beta moved up!
+Nobody died last turn.
+  1  2  3  4  5  6  7  8  9 10 1 |  -  -  -  -  -  -  -  -  -  -
+ 2 |  -  -  -  -  -  -  -  -  -  -
+ 3 |  -  -  -  -  -  -  -  -  -  -
+ 4 |  -  -  -  -  -  -  -  -  -  -
+ 5 |  -  -  -  -  J  -  -  -  -  -
+ 6 |  -  -  -  -  -  -  -  -  -  -
+ 7 |  A  -  -  -  -  -  -  K  B  -
+ 8 |  -  -  -  -  -  -  -  -  -  -
+ 9 |  -  -  -  -  -  -  -  -  -  -
+10 |  -  -  -  -  -  -  -  -  -  -
+Kidd is thinking...
+Kidd is tracking Kidd at 7 6
+Kidd has run out of Track charges!Kidd is looking around...
+Kidd found a target on the right!
+Kidd attempts shooting at Beta!
+Kidd missed! 
+Jet is thinking...
+Jet is looking around...
+Jet moved to the top left!
+Alpha is thinking...
+Alpha is looking around...
+Alpha moved to the bottom left and hit a wall!
+Beta is thinking...
+Beta is looking around...
+Beta found a target on the left!
+Beta attempts shooting at Kidd!
+Beta hit and destroyed Kidd!
+Kidd now has 1 lives left.
+Kidd respawned at coordinates 2 1!
+  1  2  3  4  5  6  7  8  9 10 1 |  -  K  -  -  -  -  -  -  -  -
+ 2 |  -  -  -  -  -  -  -  -  -  -
+ 3 |  -  -  -  -  -  -  -  -  -  -
+ 4 |  -  -  -  J  -  -  -  -  -  -
+ 5 |  -  -  -  -  -  -  -  -  -  -
+ 6 |  -  -  -  -  -  -  -  -  -  -
+ 7 |  A  -  -  -  -  -  -  -  B  -
+ 8 |  -  -  -  -  -  -  -  -  -  -
+ 9 |  -  -  -  -  -  -  -  -  -  -
+10 |  -  -  -  -  -  -  -  -  -  -
+Kidd is thinking...
+Kidd is looking around...
+Kidd chose to not move!
+Jet is thinking...
+Jet is looking around...
+Jet chose to not move!
+Alpha is thinking...
+Alpha is looking around...
+Alpha moved to the top right!
+Beta is thinking...
+Beta is looking around...
+Beta moved to the right!
+Nobody died last turn.
+  1  2  3  4  5  6  7  8  9 10 1 |  -  K  -  -  -  -  -  -  -  -
+ 2 |  -  -  -  -  -  -  -  -  -  -
+ 3 |  -  -  -  -  -  -  -  -  -  -
+ 4 |  -  -  -  J  -  -  -  -  -  -
+ 5 |  -  -  -  -  -  -  -  -  -  -
+ 6 |  -  A  -  -  -  -  -  -  -  -
+ 7 |  -  -  -  -  -  -  -  -  -  B
+ 8 |  -  -  -  -  -  -  -  -  -  -
+ 9 |  -  -  -  -  -  -  -  -  -  -
+10 |  -  -  -  -  -  -  -  -  -  -
+Kidd is thinking...
+Kidd is looking around...
+Kidd moved to the top and bonked its head on a wall!
+Jet is thinking...
+Jet is looking around...
+Jet moved down!
+Alpha is thinking...
+Alpha is looking around...
+Alpha moved down!
+Beta is thinking...
+Beta is looking around...
+Beta moved up!
+Nobody died last turn.
+  1  2  3  4  5  6  7  8  9 10 1 |  -  K  -  -  -  -  -  -  -  -
+ 2 |  -  -  -  -  -  -  -  -  -  -
+ 3 |  -  -  -  -  -  -  -  -  -  -
+ 4 |  -  -  -  -  -  -  -  -  -  -
+ 5 |  -  -  -  J  -  -  -  -  -  -
+ 6 |  -  -  -  -  -  -  -  -  -  B
+ 7 |  -  A  -  -  -  -  -  -  -  -
+ 8 |  -  -  -  -  -  -  -  -  -  -
+ 9 |  -  -  -  -  -  -  -  -  -  -
+10 |  -  -  -  -  -  -  -  -  -  -
+Kidd is thinking...
+Kidd is looking around...
+Kidd moved down!
+Jet is thinking...
+Jet is looking around...
+Jet moved down left!
+Alpha is thinking...
+Alpha is looking around...
+Alpha moved to the top right!
+Beta is thinking...
+Beta is looking around...
+Beta chose to not move!
+Nobody died last turn.
+  1  2  3  4  5  6  7  8  9 10 1 |  -  -  -  -  -  -  -  -  -  -
+ 2 |  -  K  -  -  -  -  -  -  -  -
+ 3 |  -  -  -  -  -  -  -  -  -  -
+ 4 |  -  -  -  -  -  -  -  -  -  -
+ 5 |  -  -  -  -  -  -  -  -  -  -
+ 6 |  -  -  A  -  -  -  -  -  -  B
+ 7 |  -  -  -  -  -  -  -  -  -  -
+ 8 |  -  -  -  -  -  -  -  -  -  -
+ 9 |  -  -  -  -  -  -  -  -  -  -
+10 |  -  -  -  -  -  -  -  -  -  -
+Kidd is thinking...
+Kidd is looking around...
+Kidd moved down!
+Jet is thinking...
+Jet is looking around...
+Jet moved down right!
+Alpha is thinking...
+Alpha is looking around...
+Alpha moved down left!
+Beta is thinking...
+Beta is looking around...
+Beta moved up!
+Nobody died last turn.
+  1  2  3  4  5  6  7  8  9 10 1 |  -  -  -  -  -  -  -  -  -  -
+ 2 |  -  -  -  -  -  -  -  -  -  -
+ 3 |  -  K  -  -  -  -  -  -  -  -
+ 4 |  -  -  -  -  -  -  -  -  -  -
+ 5 |  -  -  -  -  -  -  -  -  -  B
+ 6 |  -  -  -  -  -  -  -  -  -  -
+ 7 |  -  A  -  J  -  -  -  -  -  -
+ 8 |  -  -  -  -  -  -  -  -  -  -
+ 9 |  -  -  -  -  -  -  -  -  -  -
+10 |  -  -  -  -  -  -  -  -  -  -
+Kidd is thinking...
+Kidd is looking around...
+Kidd moved up!
+Jet is thinking...
+Jet is looking around...
+Jet chose to not move!
+Alpha is thinking...
+Alpha is looking around...
+Alpha moved to the right!
+Beta is thinking...
+Beta is looking around...
+Betamoved to the top right and hit a wall!
+Nobody died last turn.
+  1  2  3  4  5  6  7  8  9 10 1 |  -  -  -  -  -  -  -  -  -  -
+ 2 |  -  K  -  -  -  -  -  -  -  -
+ 3 |  -  -  -  -  -  -  -  -  -  -
+ 4 |  -  -  -  -  -  -  -  -  -  -
+ 5 |  -  -  -  -  -  -  -  -  -  B
+ 6 |  -  -  -  -  -  -  -  -  -  -
+ 7 |  -  -  A  J  -  -  -  -  -  -
+ 8 |  -  -  -  -  -  -  -  -  -  -
+ 9 |  -  -  -  -  -  -  -  -  -  -
+10 |  -  -  -  -  -  -  -  -  -  -
+Kidd is thinking...
+Kidd is looking around...
+Kidd moved down!
+Jet is thinking...
+Jet is looking around...
+Jet found a target on the left!
+Jet attempts shooting at Alpha!
+Jet hit and destroyed Alpha!
+Alpha now has 0 lives left.
+Beta is thinking...
+Beta is looking around...
+Betamoved to the top right and hit a wall!
+Alpha is eliminated and will no longer respawn!
+  1  2  3  4  5  6  7  8  9 10 1 |  -  -  -  -  -  -  -  -  -  -
+ 2 |  -  -  -  -  -  -  -  -  -  -
+ 3 |  -  K  -  -  -  -  -  -  -  -
+ 4 |  -  -  -  -  -  -  -  -  -  -
+ 5 |  -  -  -  -  -  -  -  -  -  B
+ 6 |  -  -  -  -  -  -  -  -  -  -
+ 7 |  -  -  -  J  -  -  -  -  -  -
+ 8 |  -  -  -  -  -  -  -  -  -  -
+ 9 |  -  -  -  -  -  -  -  -  -  -
+10 |  -  -  -  -  -  -  -  -  -  -
+Kidd is thinking...
+Kidd is looking around...
+Kidd moved to the left!
+Jet is thinking...
+Jet is looking around...
+Jet moved down left!
+Beta is thinking...
+Beta is looking around...
+Betamoved to the top right and hit a wall!
+Nobody died last turn.
+  1  2  3  4  5  6  7  8  9 10 1 |  -  -  -  -  -  -  -  -  -  -
+ 2 |  -  -  -  -  -  -  -  -  -  -
+ 3 |  K  -  -  -  -  -  -  -  -  -
+ 4 |  -  -  -  -  -  -  -  -  -  -
+ 5 |  -  -  -  -  -  -  -  -  -  B
+ 6 |  -  -  -  -  -  -  -  -  -  -
+ 7 |  -  -  -  -  -  -  -  -  -  -
+ 8 |  -  -  J  -  -  -  -  -  -  -
+ 9 |  -  -  -  -  -  -  -  -  -  -
+10 |  -  -  -  -  -  -  -  -  -  -
+Kidd is thinking...
+Kidd is looking around...
+Kidd moved to the top right!
+Jet is thinking...
+Jet is looking around...
+Jet moved to the right!
+Beta is thinking...
+Beta is looking around...
+Beta chose to not move!
+Nobody died last turn.
+  1  2  3  4  5  6  7  8  9 10 1 |  -  -  -  -  -  -  -  -  -  -
+ 2 |  -  K  -  -  -  -  -  -  -  -
+ 3 |  -  -  -  -  -  -  -  -  -  -
+ 4 |  -  -  -  -  -  -  -  -  -  -
+ 5 |  -  -  -  -  -  -  -  -  -  B
+ 6 |  -  -  -  -  -  -  -  -  -  -
+ 7 |  -  -  -  -  -  -  -  -  -  -
+ 8 |  -  -  -  J  -  -  -  -  -  -
+ 9 |  -  -  -  -  -  -  -  -  -  -
+10 |  -  -  -  -  -  -  -  -  -  -
+
+Gragas Bot has spawned at X:6 Y:4!
+
+Yuven Bot has spawned at X:5 Y:2!
+
+Zamane Bot has spawned at X:6 Y:8!
+  1  2  3  4  5  6  7  8  9 10 1 |  -  -  -  -  -  -  -  -  -  -
+ 2 |  -  K  -  -  -  -  -  -  -  -
+ 3 |  -  -  -  -  -  Y  -  -  -  -
+ 4 |  -  -  -  -  -  -  -  -  -  -
+ 5 |  -  -  -  -  -  -  G  -  -  B
+ 6 |  -  -  -  -  -  -  -  -  -  -
+ 7 |  -  -  -  -  -  -  -  -  -  -
+ 8 |  -  -  -  J  -  -  -  -  -  -
+ 9 |  -  -  -  -  -  -  Z  -  -  -
+10 |  -  -  -  -  -  -  -  -  -  -
+Kidd is thinking...
+Kidd is looking around...
+Kidd moved to the left!
+Jet is thinking...
+Jet is looking around...
+Jet moved down left!
+Beta is thinking...
+Beta is looking around...
+Beta moved to the left!
+Gragas is thinking...
+Gragas is looking around...
+Gragas moved to the top right!
+Yuven is thinking...
+Yuven is looking around...
+Yuven moved down right!
+Zamane is thinking...
+Zamane is looking around...
+Zamane moved to the left!
+Nobody died last turn.
+  1  2  3  4  5  6  7  8  9 10 1 |  -  -  -  -  -  -  -  -  -  -
+ 2 |  K  -  -  -  -  -  -  -  -  -
+ 3 |  -  -  -  -  -  -  -  -  -  -
+ 4 |  -  -  -  -  -  -  Y  G  -  -
+ 5 |  -  -  -  -  -  -  -  -  B  -
+ 6 |  -  -  -  -  -  -  -  -  -  -
+ 7 |  -  -  -  -  -  -  -  -  -  -
+ 8 |  -  -  -  -  -  -  -  -  -  -
+ 9 |  -  -  J  -  -  Z  -  -  -  -
+10 |  -  -  -  -  -  -  -  -  -  -
+Kidd is thinking...
+Kidd is looking around...
+Kidd moved down right!
+Jet is thinking...
+Jet is looking around...
+Jet moved down right!
+Beta is thinking...
+Beta is looking around...
+Beta found a target on the top left!
+Beta attempts shooting at Gragas!
+Beta hit and destroyed Gragas!
+Gragas now has 2 lives left.
+Beta upgrades with JumpBot!
+Yuven is thinking...
+Yuven is looking around...
+Yuven moved to the top left!
+Zamane is thinking...
+Zamane is looking around...
+Zamane moved to the top left!
+Gragas respawned at coordinates 8 2!
+  1  2  3  4  5  6  7  8  9 10 1 |  -  -  -  -  -  -  -  -  -  -
+ 2 |  -  -  -  -  -  -  -  G  -  -
+ 3 |  -  K  -  -  -  Y  -  -  -  -
+ 4 |  -  -  -  -  -  -  -  -  -  -
+ 5 |  -  -  -  -  -  -  -  -  B  -
+ 6 |  -  -  -  -  -  -  -  -  -  -
+ 7 |  -  -  -  -  -  -  -  -  -  -
+ 8 |  -  -  -  -  Z  -  -  -  -  -
+ 9 |  -  -  -  -  -  -  -  -  -  -
+10 |  -  -  -  J  -  -  -  -  -  -
+Kidd is thinking...
+Kidd is looking around...
+Kidd chose to not move!
+Jet is thinking...
+Jet is looking around...
+Jet moved to the bottom and hit a wall!
+Beta is thinking...
+Beta is looking around...
+Gragas is thinking...
+Gragas is looking around...
+Gragas moved down!
+Yuven is thinking...
+Yuven is looking around...
+Yuven moved down left!
+Zamane is thinking...
+Zamane is looking around...
+Zamane moved down!
+Nobody died last turn.
+  1  2  3  4  5  6  7  8  9 10 1 |  -  -  -  -  -  -  -  -  -  -
+ 2 |  -  -  -  -  -  -  -  -  -  -
+ 3 |  -  K  -  -  -  -  -  G  -  -
+ 4 |  -  -  -  -  Y  -  -  -  -  -
+ 5 |  -  -  -  -  -  -  -  -  -  -
+ 6 |  -  -  -  -  -  -  -  -  -  -
+ 7 |  -  -  -  -  B  -  -  -  -  -
+ 8 |  -  -  -  -  -  -  -  -  -  -
+ 9 |  -  -  -  -  Z  -  -  -  -  -
+10 |  -  -  -  J  -  -  -  -  -  -
+Kidd is thinking...
+Kidd is looking around...
+Kidd moved down right!
+Jet is thinking...
+Jet is looking around...
+Jet found a target on top right!
+Jet attempts shooting at Zamane!
+Jet hit and destroyed Zamane!
+Zamane now has 2 lives left.
+Jet upgrades with HideBot!
+Beta is thinking...
+Beta is looking around...
+Gragas is thinking...
+Gragas is looking around...
+Gragas moved down!
+Yuven is thinking...
+Yuven is looking around...
+Yuven chose to not move!
+Zamane respawned at coordinates 2 1!
+  1  2  3  4  5  6  7  8  9 10 1 |  -  Z  -  -  -  -  -  -  -  -
+ 2 |  -  -  -  -  -  -  -  -  -  -
+ 3 |  -  -  -  -  -  -  -  -  -  -
+ 4 |  -  -  K  -  Y  -  -  G  -  -
+ 5 |  -  -  -  -  -  -  -  -  -  -
+ 6 |  -  -  -  -  -  -  -  -  -  -
+ 7 |  -  -  -  -  -  -  -  -  -  -
+ 8 |  -  -  B  -  -  -  -  -  -  -
+ 9 |  -  -  -  -  -  -  -  -  -  -
+10 |  -  -  -  J  -  -  -  -  -  -
+Kidd is thinking...
+Kidd is looking around...
+Kidd moved to the right!
+Jet is thinking...
+Jet is looking around...
+Jet moved to the bottom right and hit a wall!
+Beta is thinking...
+Beta is looking around...
+Beta ran out of jump charges!
+Gragas is thinking...
+Gragas is looking around...
+Gragas moved to the left!
+Yuven is thinking...
+Yuven is looking around...
+Yuven moved to the right!
+Zamane is thinking...
+Zamane is looking around...
+Zamane moved to the top and bonked its head on a wall!
+Nobody died last turn.
+  1  2  3  4  5  6  7  8  9 10 1 |  -  Z  B  -  -  -  -  -  -  -
+ 2 |  -  -  -  -  -  -  -  -  -  -
+ 3 |  -  -  -  -  -  -  -  -  -  -
+ 4 |  -  -  -  K  -  Y  G  -  -  -
+ 5 |  -  -  -  -  -  -  -  -  -  -
+ 6 |  -  -  -  -  -  -  -  -  -  -
+ 7 |  -  -  -  -  -  -  -  -  -  -
+ 8 |  -  -  -  -  -  -  -  -  -  -
+ 9 |  -  -  -  -  -  -  -  -  -  -
+10 |  -  -  -  J  -  -  -  -  -  -
+Kidd is thinking...
+Kidd is looking around...
+Kidd moved to the left!
+Jet is thinking...
+Jet is looking around...
+Jet moved up!
+Beta is thinking...
+Beta is looking around...
+Beta found a target on the left!
+Beta attempts shooting at Zamane!
+Beta missed! 
+Gragas is thinking...
+Gragas is looking around...
+Gragas found a target on the left!
+Gragas attempts shooting at Yuven!
+Gragas hit and destroyed Yuven!
+Yuven now has 2 lives left.
+Gragas upgrades with LongShotBot!
+Zamane is thinking...
+Zamane is looking around...
+Zamane found a target on the right!
+Zamane attempts shooting at Beta!
+Zamane hit and destroyed Beta!
+Beta now has 0 lives left.
+Yuven respawned at coordinates 8 2!
+  1  2  3  4  5  6  7  8  9 10 1 |  -  Z  -  -  -  -  -  -  -  -
+ 2 |  -  -  -  -  -  -  -  Y  -  -
+ 3 |  -  -  -  -  -  -  -  -  -  -
+ 4 |  -  -  K  -  -  -  G  -  -  -
+ 5 |  -  -  -  -  -  -  -  -  -  -
+ 6 |  -  -  -  -  -  -  -  -  -  -
+ 7 |  -  -  -  -  -  -  -  -  -  -
+ 8 |  -  -  -  -  -  -  -  -  -  -
+ 9 |  -  -  -  J  -  -  -  -  -  -
+10 |  -  -  -  -  -  -  -  -  -  -
+Kidd is thinking...
+Kidd is looking around...
+Kidd moved to the left!
+Jet is thinking...
+Jet is looking around...
+Jet moved down!
+Gragas is thinking...
+Gragas is looking around...
+Gragas can shoot further with LongShotBot upgrade!
+Gragas moved up!
+Yuven is thinking...
+Yuven is looking around...
+Yuven moved to the top right!
+Zamane is thinking...
+Zamane is looking around...
+Zamane moved to the top and bonked its head on a wall!
+Beta is eliminated and will no longer respawn!
+  1  2  3  4  5  6  7  8  9 10 1 |  -  Z  -  -  -  -  -  -  Y  -
+ 2 |  -  -  -  -  -  -  -  -  -  -
+ 3 |  -  -  -  -  -  -  G  -  -  -
+ 4 |  -  K  -  -  -  -  -  -  -  -
+ 5 |  -  -  -  -  -  -  -  -  -  -
+ 6 |  -  -  -  -  -  -  -  -  -  -
+ 7 |  -  -  -  -  -  -  -  -  -  -
+ 8 |  -  -  -  -  -  -  -  -  -  -
+ 9 |  -  -  -  -  -  -  -  -  -  -
+10 |  -  -  -  J  -  -  -  -  -  -
+Kidd is thinking...
+Kidd is looking around...
+Kidd moved up!
+Jet is thinking...
+Jet is looking around...
+Jet moved to the top left!
+Gragas is thinking...
+Gragas is looking around...
+Gragas can shoot further with LongShotBot upgrade!
+Gragas found a target on top right!
+Gragas attempts shooting at Yuven!
+Gragas hit and destroyed Yuven!
+Yuven now has 1 lives left.
+Gragas upgrades with JumpBot!
+Zamane is thinking...
+Zamane is looking around...
+Zamane moved to the right!
+Yuven respawned at coordinates 6 4!
+  1  2  3  4  5  6  7  8  9 10 1 |  -  -  Z  -  -  -  -  -  -  -
+ 2 |  -  -  -  -  -  -  -  -  -  -
+ 3 |  -  K  -  -  -  -  G  -  -  -
+ 4 |  -  -  -  -  -  Y  -  -  -  -
+ 5 |  -  -  -  -  -  -  -  -  -  -
+ 6 |  -  -  -  -  -  -  -  -  -  -
+ 7 |  -  -  -  -  -  -  -  -  -  -
+ 8 |  -  -  -  -  -  -  -  -  -  -
+ 9 |  -  -  J  -  -  -  -  -  -  -
+10 |  -  -  -  -  -  -  -  -  -  -
+Kidd is thinking...
+Kidd is looking around...
+Kidd moved to the left!
+Jet is thinking...
+Jet is looking around...
+Jet moved to the top right!
+Gragas is thinking...
+Gragas is looking around...
+Gragas can shoot further with LongShotBot upgrade!
+Gragas found a target on below left!
+Gragas attempts shooting at Yuven!
+Gragas hit and destroyed Yuven!
+Yuven now has 0 lives left.
+Gragas upgrades with LongShotBot!
+Zamane is thinking...
+Zamane is looking around...
+Zamane moved down right!
+Yuven is eliminated and will no longer respawn!
+  1  2  3  4  5  6  7  8  9 10 1 |  -  -  -  -  -  -  -  -  -  -
+ 2 |  -  -  -  Z  -  -  -  -  -  -
+ 3 |  K  -  -  -  -  -  G  -  -  -
+ 4 |  -  -  -  -  -  -  -  -  -  -
+ 5 |  -  -  -  -  -  -  -  -  -  -
+ 6 |  -  -  -  -  -  -  -  -  -  -
+ 7 |  -  -  -  -  -  -  -  -  -  -
+ 8 |  -  -  -  J  -  -  -  -  -  -
+ 9 |  -  -  -  -  -  -  -  -  -  -
+10 |  -  -  -  -  -  -  -  -  -  -
+Kidd is thinking...
+Kidd is looking around...
+Kidd moved down!
+Jet is thinking...
+Jet is looking around...
+Jet moved to the left!
+Gragas is thinking...
+Gragas is looking around...
+Gragas can shoot further with LongShotBot upgrade!
+Zamane is thinking...
+Zamane is looking around...
+Zamane moved to the left!
+Nobody died last turn.
+  1  2  3  4  5  6  7  8  9 10 1 |  -  -  -  -  -  -  -  -  -  -
+ 2 |  -  -  Z  -  -  -  -  -  -  -
+ 3 |  -  -  -  -  -  -  -  -  -  -
+ 4 |  K  -  -  -  -  -  -  -  -  -
+ 5 |  -  -  -  -  -  -  -  -  -  -
+ 6 |  -  -  -  -  -  -  -  -  -  -
+ 7 |  -  -  -  -  -  -  -  -  -  -
+ 8 |  -  G  J  -  -  -  -  -  -  -
+ 9 |  -  -  -  -  -  -  -  -  -  -
+10 |  -  -  -  -  -  -  -  -  -  -
+Kidd is thinking...
+Kidd is looking around...
+Kidd chose to not move!
+Jet is thinking...
+Jet is looking around...
+Jet found a target on the left!
+Jet attempts shooting at Gragas!
+Jet missed! 
+Gragas is thinking...
+Gragas is looking around...
+Gragas can shoot further with LongShotBot upgrade!
+Gragas found a target on the right!
+Gragas attempts shooting at Jet!
+Gragas hit and destroyed Jet!
+Jet now has 1 lives left.
+Gragas upgrades with ScoutBot!
+Zamane is thinking...
+Zamane is looking around...
+Zamane moved to the top right!
+Jet respawned at coordinates 5 3!
+  1  2  3  4  5  6  7  8  9 10 1 |  -  -  -  Z  -  -  -  -  -  -
+ 2 |  -  -  -  -  -  -  -  -  -  -
+ 3 |  -  -  -  -  J  -  -  -  -  -
+ 4 |  K  -  -  -  -  -  -  -  -  -
+ 5 |  -  -  -  -  -  -  -  -  -  -
+ 6 |  -  -  -  -  -  -  -  -  -  -
+ 7 |  -  -  -  -  -  -  -  -  -  -
+ 8 |  -  G  -  -  -  -  -  -  -  -
+ 9 |  -  -  -  -  -  -  -  -  -  -
+10 |  -  -  -  -  -  -  -  -  -  -
+Kidd is thinking...
+Kidd is looking around...
+Kidd chose to not move!
+Jet is thinking...
+Jet is looking around...
+Jet moved to the left!
+Gragas is thinking...
+Gragas scouts the whole battlefield!
+Gragas decides to shoot at Zamane
+Gragas attempts shooting at Zamane!
+Gragas hit and destroyed Zamane!
+Zamane now has 1 lives left.
+Zamane respawned at coordinates 3 4!
+  1  2  3  4  5  6  7  8  9 10 1 |  -  -  -  -  -  -  -  -  -  -
+ 2 |  -  -  -  -  -  -  -  -  -  -
+ 3 |  -  -  -  J  -  -  -  -  -  -
+ 4 |  K  -  Z  -  -  -  -  -  -  -
+ 5 |  -  -  -  -  -  -  -  -  -  -
+ 6 |  -  -  -  -  -  -  -  -  -  -
+ 7 |  -  -  -  -  -  -  -  -  -  -
+ 8 |  -  G  -  -  -  -  -  -  -  -
+ 9 |  -  -  -  -  -  -  -  -  -  -
+10 |  -  -  -  -  -  -  -  -  -  -
+Kidd is thinking...
+Kidd is looking around...
+Kidd moved to the top right!
+Jet is thinking...
+Jet is looking around...
+Jet found a target on below left!
+Jet attempts shooting at Zamane!
+Jet hit and destroyed Zamane!
+Zamane now has 0 lives left.
+Gragas is thinking...
+Gragas scouts the whole battlefield!
+Gragas decides to shoot at Jet
+Gragas attempts shooting at Jet!
+Gragas hit and destroyed Jet!
+Jet now has 0 lives left.
+Zamane is eliminated and will no longer respawn!
+  1  2  3  4  5  6  7  8  9 10 1 |  -  -  -  -  -  -  -  -  -  -
+ 2 |  -  -  -  -  -  -  -  -  -  -
+ 3 |  -  K  -  -  -  -  -  -  -  -
+ 4 |  -  -  -  -  -  -  -  -  -  -
+ 5 |  -  -  -  -  -  -  -  -  -  -
+ 6 |  -  -  -  -  -  -  -  -  -  -
+ 7 |  -  -  -  -  -  -  -  -  -  -
+ 8 |  -  G  -  -  -  -  -  -  -  -
+ 9 |  -  -  -  -  -  -  -  -  -  -
+10 |  -  -  -  -  -  -  -  -  -  -
+Kidd is thinking...
+Kidd is looking around...
+Kidd moved to the right!
+Gragas is thinking...
+Gragas scouts the whole battlefield!
+Gragas decides to shoot at Kidd
+Gragas attempts shooting at Kidd!
+Gragas hit and destroyed Kidd!
+Kidd now has 0 lives left.
+Gragas has run out of Scout charges!Jet is eliminated and will no longer respawn!
+  1  2  3  4  5  6  7  8  9 10 1 |  -  -  -  -  -  -  -  -  -  -
+ 2 |  -  -  -  -  -  -  -  -  -  -
+ 3 |  -  -  -  -  -  -  -  -  -  -
+ 4 |  -  -  -  -  -  -  -  -  -  -
+ 5 |  -  -  -  -  -  -  -  -  -  -
+ 6 |  -  -  -  -  -  -  -  -  -  -
+ 7 |  -  -  -  -  -  -  -  -  -  -
+ 8 |  -  G  -  -  -  -  -  -  -  -
+ 9 |  -  -  -  -  -  -  -  -  -  -
+10 |  -  -  -  -  -  -  -  -  -  -
+Gragas has won the game!
