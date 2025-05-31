@@ -679,7 +679,7 @@ int main(){
     // DisplayBattlefield();
     // respawnRobot();
     // DisplayBattlefield();
-
+     Robot* W = nullptr; //declaring W to ensure the scope covers the methods from robot class
      while(steps > 0){
         int bots_left = 0; //bot counter
         for(int i = 0; i < r; i++){
@@ -688,11 +688,28 @@ int main(){
         respawnRobot();
         DisplayBattlefield();
 
-     
 
       steps -=1;
 
+      for(int i = 0 ; i < r ; i++){
+            if(robots[i]->isAlive()){
+                bots_left++;
+                 W = robots[i];
 
+            }
+              }
+              if(bots_left ==1){
+                win_con1 = true;
+                cout << W->get_name() << " has won the game!" << endl;
+                break;
+
+
+              }
+   }
+   if(steps <= 0 && win_con1 == false){
+
+    win_con2 = true;
+    cout << "The game has ran out of turns! Game ends in a draw." << endl;
    }
 }
 
