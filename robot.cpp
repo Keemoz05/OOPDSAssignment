@@ -17,6 +17,7 @@ string filetoread = "examplefile.txt";
 int battlefieldlength = 0;
 int battlefieldwidth = 0;
 int steps = 0;
+int turncounter = 1;
 int robotamount = 0;
 int r = 0; //if r > robotamount, dont take anymore generic robots
 ofstream outFile("output.txt", ios::out);
@@ -253,7 +254,7 @@ class MovingRobot : virtual public Robot{
             cout << robot_name << " moved to the top left!" << endl;
             outFile << robot_name << " moved to the top left!" << endl;
             }
-            else{cout << robot_name << " moved to the top left and hit a wall!" << endl; outFile << robot_name << " moved to the top left and hit a wall!" << endl;} 
+            else{cout << robot_name << " moved to the top left and hit a wall!" << endl; outFile << robot_name << " moved to the top left and hit a wall!" << endl;}
             break;
             case 5:
             if(robot_locationY - 1 != -1){
@@ -339,6 +340,8 @@ class ShootingRobot : virtual public Robot{
                 cout << this->robot_name <<" attempts shooting at " << robots[i]->get_name() << "!" << endl;
                 outFile << this->robot_name <<" attempts shooting at " << robots[i]->get_name() << "!" << endl;
                 this->use_ammo();
+                cout << this->robot_name << " has " << this->get_shells() << " shells left." << endl;
+                outFile << this->robot_name << " has " << this->get_shells() << " shells left." << endl;
                 int hit_probability = rand() % 100 + 1; //choose from 0 to 100
                 //int hit_probability = 69;
                 if(hit_probability < 70){
@@ -383,8 +386,8 @@ class ShootingRobot : virtual public Robot{
         }
     }while(!ShotSuccess);
     if(this->get_shells() <= 0){
-            cout << get_name() <<  "has ran out of shells and will self destruct!" << endl;
-            outFile << get_name() <<  "has ran out of shells and will self destruct!" << endl;
+            cout << get_name() <<  " has ran out of shells and will self destruct!" << endl;
+            outFile << get_name() <<  " has ran out of shells and will self destruct!" << endl;
             this->decrease_lives();
             grid[robot_locationY][robot_locationX] = '-'; //remove destroyed robot from map, correct the syntax if relevant
             robot_locationX = -1; //dead means at -1
@@ -415,7 +418,7 @@ class SeeingRobot : virtual public Robot { // Aidil
         if(X != -1 && Y != -1){
         cout << robot_name << " is tracking " << robots[randomtarget]->get_name() << " at " << robots[randomtarget]->get_locationX() << " " << robots[randomtarget]->get_locationY() << endl;
         outFile << robot_name << " is tracking " << robots[randomtarget]->get_name() << " at " << robots[randomtarget]->get_locationX() << " " << robots[randomtarget]->get_locationY() << endl;
-            
+
     }
     }
 
@@ -460,7 +463,7 @@ class SeeingRobot : virtual public Robot { // Aidil
         } else {
         range = 1;
         }
-        
+
         int dx[] = {-1, 0, 1, 1, 1, 0, -1, -1};
         int dy[] = {-1, -1, -1, 0, 1, 1, 1, 0};
 
@@ -470,7 +473,7 @@ class SeeingRobot : virtual public Robot { // Aidil
                     int a = robot_locationX + dx[i] * step;
                     int b = robot_locationY + dy[i] * step;
             //cout << grid[b][a] << " "  << a << " " << b << endl;
-                
+
             if (a >= 0 && a < battlefieldwidth && b >= 0 && b < battlefieldlength){    //check if a and b is out of bounds,if true, dont look there
             if(grid[b][a] != '-'){
 
@@ -670,7 +673,7 @@ class GenericRobot : public ShootingRobot,public MovingRobot,public SeeingRobot,
             else if (chosenUpgrade == "TrackBot"){
                 canTrack = true;
             }
-        } 
+        }
 
 
     }
@@ -753,10 +756,11 @@ int main(){
         }
         respawnRobot();
         DisplayBattlefield();
- 
-       
+
+
 
       steps -=1;
+      turncounter +=1;
 
       for(int i = 0 ; i < r ; i++){
             if(robots[i]->isAlive()){
@@ -769,7 +773,8 @@ int main(){
                 win_con1 = true;
                 cout << W->get_name() << " has won the game!" << endl;
                 outFile << W->get_name() << " has won the game!" << endl;
-                break;
+                exit(0);
+
 
 
               }
@@ -813,7 +818,8 @@ int main(){
                 win_con1 = true;
                 cout << W->get_name() << " has won the game!" << endl;
                 outFile << W->get_name() << " has won the game!" << endl;
-                break;
+                exit(0);
+
 
 
 
@@ -845,12 +851,18 @@ void DisplayBattlefield(){
 
     }
     // Print top X-axis labels
+    cout << endl;
+    outFile << endl;
+    cout << "Turn: " << turncounter << endl;
+    outFile << "Turn: " << turncounter << endl;
     cout << "    "; // Padding before column numbers
+    outFile << "    ";
     for (int i = 0; i < grid[0].size(); i++) {
         cout << setw(3) << (i + 1);
         outFile << setw(3) << (i + 1);
     }
     cout << endl;
+    outFile << endl;
 
     // Print each row
     for (int i = 0; i < grid.size(); i++) {
@@ -860,9 +872,11 @@ void DisplayBattlefield(){
             cout << setw(3) << grid[i][j]; // Each cell with fixed width
             outFile  << setw(3) << grid[i][j];
         }
-        cout << endl;
-        outFile << endl;
+        cout << endl ;
+        outFile << endl ;
     }
+    cout << endl ;
+    outFile << endl ;
 
 
 }
@@ -879,13 +893,13 @@ void SpawnRobots(){
         do {
             X = rand() % battlefieldlength;
             Y = rand() % battlefieldwidth;
-        } while (grid[Y][X] != '-' || X ==0 || Y == 0 || X == battlefieldlength || Y == battlefieldwidth); 
+        } while (grid[Y][X] != '-' || X ==0 || Y == 0 || X == battlefieldlength || Y == battlefieldwidth);
         robots[r]->set_locationX(X);
         robots[r]->set_locationY(Y);
         cout << endl;
-        cout << robots[r]->get_name() << " Bot has spawned at " << "X:" << X-1 << " Y:"  << Y-1 << "!" << endl; 
+        cout << robots[r]->get_name() << " Bot has spawned at " << "X:" << X-1 << " Y:"  << Y-1 << "!" << endl;
         outFile << endl;
-        outFile << robots[r]->get_name() << " Bot has spawned at " << "X:" << X-1 << " Y:"  << Y-1 << "!" << endl; 
+        outFile << robots[r]->get_name() << " Bot has spawned at " << "X:" << X-1 << " Y:"  << Y-1 << "!" << endl;
         r++;
 
     }
@@ -959,7 +973,7 @@ void respawnRobot(){ //when called will loop thru the list of respawning robots 
 
                     Deaddead.push_back(R); //if the robot is no longer alive, put it into another vector list
                     cout << R->get_name() <<  " is eliminated and will no longer respawn!" << endl;
-                    outFile << R->get_name() <<  " is eliminated and will no longer respawn!" << endl;
+                    outFile << R->get_name() <<  " is eliminated and will no longer respawn!" << endl << endl;
                     respawnlist.erase(respawnlist.begin()); //remove dead robot from respawnlist
                     }
 
