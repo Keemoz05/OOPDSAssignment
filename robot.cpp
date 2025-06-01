@@ -19,6 +19,7 @@ int battlefieldwidth = 0;
 int steps = 0;
 int robotamount = 0;
 int r = 0; //if r > robotamount, dont take anymore generic robots
+Robot* robots[99]; //Note: delete objects afterwards to reduce memory leaks
 ofstream outFile("output.txt", ios::out);
 
 // === CLASS DECLARATIONS ===
@@ -53,6 +54,7 @@ class Robot{
     int TrackCharges = 3;
 
     int HideCharges;
+
     public:
     bool IsHiding = false; //public because being used by other robot to see if the enmy is hidden
         // Check if a robot has already used an area upgrade
@@ -87,8 +89,6 @@ class Robot{
     //     locationY = robot_locationY;
     // }
 
-
-    public:
     void SetcanJump(){
         CanJump = true;
         JumpCharges = 3;
@@ -186,6 +186,7 @@ class Robot{
     virtual void applyUpgrade() = 0;
     virtual void scout() = 0;
     virtual void track() = 0;
+
     void TakeTurn(){
         if(this->robot_locationX != -1 && this->robot_locationY != -1 && isAlive()){
         think();
@@ -194,12 +195,7 @@ class Robot{
 
 };
 
-Robot* robots[99]; //Note: delete objects afterwards to reduce memory leaks
-
-
 class MovingRobot : virtual public Robot{
-
-    private:
 
     protected:
     void move(){
@@ -829,8 +825,6 @@ int main(){
 }
 // === FUNCTION DECLARATIONS ===
 void DisplayBattlefield(){
-
-
 
     for(int b=0;b < r;b++){
         //grid[robotsvector[b].get_locationX()-1][robotsvector[b].get_locationY()-1] = 'O'; //MINUS ONE BECAUSE ARRAYGRID START FROM 0
