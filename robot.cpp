@@ -22,7 +22,7 @@
 using namespace std;
 
 // === GLOBAL VARIABLES ===
-vector<string> grid;
+vector<string> grid;          
 class Robot; //forward declaration
 vector<Robot*> respawnlist;
 string filetoread = "examplefile.txt";
@@ -32,7 +32,8 @@ int steps = 0;
 int turncounter = 1;
 int robotamount = 0;
 int r = 0; //if r > robotamount, dont take anymore generic robots
-ofstream outFile("output.txt", ios::out);
+Robot* robots[99];
+ofstream outFile("GameLog3.txt", ios::out);
 
 // === CLASS DECLARATIONS ===
 //This Robot class is to be inherited by 4 basic abstract subclasses, namely MovingRobot, ShootingRobot, SeeingRobot and ThinkingRobot.
@@ -207,7 +208,7 @@ class Robot{
 
 };
 
-Robot* robots[99]; //Note: delete objects afterwards to reduce memory leaks
+ //Note: delete objects afterwards to reduce memory leaks
 
 
 class MovingRobot : virtual public Robot{
@@ -410,20 +411,11 @@ class ShootingRobot : virtual public Robot{
 
 };
 
-class SeeingRobot : virtual public Robot { // Aidil
-    // The look(x,y) action will check a 3x3 grid to a robot,
-    // centred on (robotsPositionX + x, robotsPositionY + y).
-    // Example: look(0,0) will:
-    // 1. Provide a robot with its immediate neighbourhood (all visitable places in the next turn)
-    // 2. Reveal whether the location is within the battlefield
-    // 3. Reveal whether a location is has an enemy robot
-    // Note: A location can only have one robot at a time
+class SeeingRobot : virtual public Robot { 
 
     protected:
 
     void track(){
-
-
         int randomtarget = rand() % r;
         int X = robots[randomtarget]->get_locationX();
         int Y = robots[randomtarget]->get_locationY();
@@ -551,20 +543,13 @@ class SeeingRobot : virtual public Robot { // Aidil
     }
 };
 
-class ThinkingRobot : virtual public Robot{ // Aidil
-    // ThinkingRobot is for decision making
-    // Should the robot move? shoot? look?
+class ThinkingRobot : virtual public Robot{ 
 
     void think() {
         foundEnemy = false;
         cout << robot_name << " is thinking..." << endl;
         outFile  << robot_name << " is thinking..." << endl;
-        // Flowchart:
-        // Look. If there's enemy, check number of shells.
-        // If no shells, move. If there is shells, fire.
-        // Ideally, output text of process
-        //this->move();
-        //if its not destroyed, then look
+
         if(canTrack == true){
             track();
             TrackCharges -= 1;
@@ -587,7 +572,7 @@ class ThinkingRobot : virtual public Robot{ // Aidil
             this->look();
             if(this->foundEnemy == false){
             cout << robot_name << " looked around but didnt found anyone!" << endl;
-            cout << robot_name << " looked around but didnt found anyone!" << endl;
+            outFile << robot_name << " looked around but didnt found anyone!" << endl;
             move();
         }
 
@@ -607,12 +592,6 @@ class GenericRobot : public ShootingRobot,public MovingRobot,public SeeingRobot,
 {
     private:
         int upgrades_left;
-
-        //shells = 3;
-        //upgrades_left =3; //or the specified amount stated in assignment pdf
-                            //figure out how value assignment works in classes
-
-
     public:
 
     void applyUpgrade() {
@@ -653,7 +632,6 @@ class GenericRobot : public ShootingRobot,public MovingRobot,public SeeingRobot,
             }
 
 
-
         } else if (chosenArea == "shooting") {
             int randShootingUpgrade = rand() % ShootingUpgrades.size();
             string chosenUpgrade = ShootingUpgrades[randShootingUpgrade];
@@ -670,8 +648,6 @@ class GenericRobot : public ShootingRobot,public MovingRobot,public SeeingRobot,
                 shells = 30;
                 cout << robot_name << "upgrades to ThirtyShotBot and is locked and loaded with 30 shells!" << endl;
             }
-
-
 
         } else if (chosenArea == "seeing") {
             int randSeeingUpgrade = rand() % SeeingUpgrades.size();
@@ -742,9 +718,9 @@ int main(){
 
 
     for (int i =0;i < battlefieldlength;i++){
-        // string line(battlefieldwidth,'-');
-        //grid[] += string (battlefieldwidth,'-');
-        grid.push_back(string (battlefieldwidth,'-'));
+        // string line(battlefieldwidth,'-');                                        
+        //grid[] += string (battlefieldwidth,'-');   
+        grid.push_back(string (battlefieldwidth,'-'));   
     }
     DisplayBattlefield();
     // robots[0]->TakeTurn(); //one robot interaction
@@ -799,6 +775,7 @@ int main(){
 
     cout << "B-b-baka w-what are you d-doing. I-i need one.. one more turn to win!" << endl;
     outFile << "B-b-baka w-what are you d-doing. I-i need one.. one more turn to win!" << endl;
+    
     cout << "Y/N?" << endl;
     outFile << "Y/N?" << endl;
     cin >> input ;
@@ -818,6 +795,7 @@ int main(){
 
 
       steps -=1;
+      turncounter +=1;
 
       for(int i = 0 ; i < r ; i++){
             if(robots[i]->isAlive()){
@@ -833,8 +811,6 @@ int main(){
                 exit(0);
 
 
-
-
               }
 
         }
@@ -847,9 +823,6 @@ int main(){
 }
 // === FUNCTION DECLARATIONS ===
 void DisplayBattlefield(){
-
-
-
     for(int b=0;b < r;b++){
         //grid[robotsvector[b].get_locationX()-1][robotsvector[b].get_locationY()-1] = 'O'; //MINUS ONE BECAUSE ARRAYGRID START FROM 0
         //cout << robots[b]->get_locationX() << "," <<  robots[b]->get_locationY() << endl;
@@ -857,8 +830,8 @@ void DisplayBattlefield(){
         int x = robots[b]->get_locationX();
         //cout << x << " " << y << endl;
         if(y != -1 && x != -1){
-            //grid[y][x] = 'R'; //grid[Y][X]
-            grid[y][x] = robots[b]->get_name()[0];//segment error here
+            //grid[y][x] = 'R'; //grid[Y][X]                           
+            grid[y][x] = robots[b]->get_name()[0];//segment error here 
         }
 
     }
@@ -876,12 +849,11 @@ void DisplayBattlefield(){
     cout << endl;
     outFile << endl;
 
-    // Print each row
     for (int i = 0; i < grid.size(); i++) {
         cout << setw(2) << (i + 1) << " |"; // Y-axis label
         outFile << setw(2) << (i + 1) << " |";
         for (int j = 0; j < grid[i].size(); j++) {
-            cout << setw(3) << grid[i][j]; // Each cell with fixed width
+            cout << setw(3) << grid[i][j]; // experiment with setw to make cell same width
             outFile  << setw(3) << grid[i][j];
         }
         cout << endl ;
@@ -944,10 +916,6 @@ void respawnRobot(){ //when called will loop thru the list of respawning robots 
         //check for robots number
         //check for if another robot is on the tile
 
-
-
-
-
             if(!respawnlist.empty()){
                 Robot* R = respawnlist.front();
 
@@ -999,8 +967,6 @@ void respawnRobot(){ //when called will loop thru the list of respawning robots 
                 outFile << "Nobody died last turn." << endl;
             }
 }
-
-
 
 
 void AnalyseFile(string line){
